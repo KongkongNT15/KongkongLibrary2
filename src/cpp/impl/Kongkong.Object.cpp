@@ -24,6 +24,11 @@
         // この場合はdeleteしてはいけない
         if (m_p->ReferenceCount() == RefCounter::NonDeleteCount()) return;
 
+        delete m_p;
+    }
 
+    void Object::SetInstance(ImplType* p) noexcept
+    {
+        if (p == nullptr) [[unlikely]] throw MemoryAllocationException::OutOfMemory();
     }
 }

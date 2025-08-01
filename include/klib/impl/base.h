@@ -142,6 +142,21 @@
 
 #define KLIB_INTERFACE struct
 
+// msvcではssize_tは定義されないので追加
+#if KLIB_COMPILER_MSVC
+    #ifdef _WIN64
+        /// <summary>
+        /// ポインターと同じ長さの整数型
+        /// </summary>
+        using ssize_t = int64_t;
+    #else
+        /// <summary>
+        /// ポインターと同じ長さの整数型
+        /// </summary>
+        using ssize_t = int32_t;
+    #endif
+#endif
+
 /// <summary>
 /// 既定の名前空間
 /// </summary>
@@ -169,10 +184,9 @@ namespace klib::Kongkong
 
     struct Exception;
     struct InvalidCastException;
+    struct MemoryAllocationException;
+    struct NullPointerException;
     struct ValueType;
-
-    template <CCharType TChar>
-    struct GenericString;
 }
 
 /// <summary>
@@ -213,6 +227,8 @@ namespace klib::Kongkong::Numerics
 /// </summary>
 namespace klib::Kongkong::Text
 {
+    template <CCharType TChar>
+    class GenericString;
 
     template <CCharType TChar>
     class GenericHeapString;
@@ -229,16 +245,18 @@ namespace klib::Kongkong::Threading
 // エイリアス
 namespace klib::Kongkong
 {
+    using String = Text::GenericString<char16_t>;
+}
+
+namespace klib::Kongkong::Text
+{
     using String = GenericString<char16_t>;
     using CharString = GenericString<char>;
     using WCharString = GenericString<wchar_t>;
     using Utf8String = GenericString<char8_t>;
     using Utf16String = GenericString<char16_t>;
     using Utf32String = GenericString<char32_t>;
-}
 
-namespace klib::Kongkong::Text
-{
     using HeapString = GenericHeapString<char16_t>;
     using HeapCharString = GenericHeapString<char>;
     using HeapWCharString = GenericHeapString<wchar_t>;

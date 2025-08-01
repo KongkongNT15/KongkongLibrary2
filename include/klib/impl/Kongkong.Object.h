@@ -4,9 +4,26 @@
 #include "base.h"
 #include <atomic>
 
+#define KLIB_KONGKONG_OBJECT_CONSTRUCTER(type, base) \
+    constexpr type(::std::nullptr_t) noexcept : base(nullptr) {}
+
+#define KLIB_KONGKONG_OBJECT_OPERATOR_UNSAFE \
+    [[nodiscard]] constexpr ImplType* operator->() const noexcept \
+    { \
+        return static_cast<ImplType*>(Object::GetPointer()); \
+    }
+
+#define KLIB_KONGKONG_OBJECT_OPERATOR \
+    [[nodiscard]] constexpr ImplType* operator->() const noexcept \
+    { \
+        auto p = Object::GetPointer(); \
+        if (p == nullptr) [[unlikely]] throw NullPointerException(); \
+        return static_cast<ImplType*>(p); \
+    }
+
 #define KLIB_KONGKONG_OBJECT_OMAJINAI(type, base) \
-    constexpr type(::std::nullptr_t) noexcept : base(nullptr) {} \
-    [[nodiscard]] constexpr ImplType* operator->() const noexcept { return static_cast<ImplType*>(Object::GetPointer()); }
+    KLIB_KONGKONG_OBJECT_CONSTRUCTER(type, base) \
+    KLIB_KONGKONG_OBJECT_OPERATOR
     
 namespace klib::Kongkong
 {
@@ -103,6 +120,7 @@ namespace klib::Kongkong
         /// ポインターなクラス
         /// </summary>
         struct Pointer {
+            friend Object;
         private:
             /// <summary>
             /// 実態へのポインター
@@ -110,6 +128,7 @@ namespace klib::Kongkong
             ImplType* m_p;
 
         public:
+            Pointer() = default;
             constexpr Pointer(ImplType* p) noexcept;
             constexpr Pointer(::std::nullptr_t) noexcept;
             Pointer(Pointer const& right) noexcept;
@@ -149,10 +168,16 @@ namespace klib::Kongkong
         /// <returns>実態へのポインター</returns>
         [[nodiscard]] constexpr ImplType* GetPointer() const noexcept;
 
+        void SetInstance(ImplType* p) noexcept;
+        void SetInstanceNullable(ImplType* p) noexcept;
+        void SetInstanceWithAddRef(ImplType* p) noexcept;
+
     public:
 
         Object();
         constexpr Object(::std::nullptr_t) noexcept;
+
+        [[nodiscard]] ImplType* operator->() const;
 
         template <class TObj> requires ::std::derived_from<TObj, Object>
         TObj As() const;
@@ -327,6 +352,19 @@ namespace klib::Kongkong
     constexpr ::std::strong_ordering operator<=>(::std::nullptr_t, Object const& right) noexcept
     {
         return nullptr <=> right.GetPointer();
+    }
+}
+
+#include "Kongkong.NullPointerException.h"
+
+namespace klib::Kongkong
+{
+    Object::ImplType* Object::operator->() const
+    {
+        auto p = GetPointer();
+        if (p == nullptr) [[unlikely]] throw NullPointerException();
+
+        return p;
     }
 }
 
