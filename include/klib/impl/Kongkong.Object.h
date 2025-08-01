@@ -24,6 +24,9 @@
 #define KLIB_KONGKONG_OBJECT_OMAJINAI(type, base) \
     KLIB_KONGKONG_OBJECT_CONSTRUCTER(type, base) \
     KLIB_KONGKONG_OBJECT_OPERATOR
+
+#define KLIB_KONGKONG_OBJECT_GETINSTANCE \
+    (Object::GetPointerChecked<ImplType>())
     
 namespace klib::Kongkong
 {
@@ -176,6 +179,9 @@ namespace klib::Kongkong
         /// <returns>実態へのポインター</returns>
         [[nodiscard]] constexpr ImplType* GetPointer() const noexcept;
 
+        template <class TImpl> requires ::std::derived_from<TImpl, ImplType>
+        constexpr TImpl* GetPointerChecked() const;
+
         void SetInstance(ImplType* p) noexcept;
         constexpr void SetInstanceUnsafe(ImplType* p) noexcept;
         void SetInstanceWithAddRef(ImplType* p) noexcept;
@@ -185,7 +191,7 @@ namespace klib::Kongkong
         Object();
         constexpr Object(::std::nullptr_t) noexcept;
 
-        [[nodiscard]] ImplType* operator->() const;
+        [[nodiscard]] constexpr ImplType* operator->() const;
 
         /// <summary>
         /// キャスト
@@ -402,7 +408,17 @@ namespace klib::Kongkong
 
 namespace klib::Kongkong
 {
-    Object::ImplType* Object::operator->() const
+    template <class TImpl> requires ::std::derived_from<TImpl, Object::ImplType>
+    constexpr TImpl* Object::GetPointerChecked() const
+    {
+        TImpl* p = static_cast<TImpl*>(GetPointer());
+
+        if (p == nullptr) [[unlikely]] throw NullPointerException();
+
+        return p;
+    }
+
+    constexpr Object::ImplType* Object::operator->() const
     {
         auto p = GetPointer();
         if (p == nullptr) [[unlikely]] throw NullPointerException();

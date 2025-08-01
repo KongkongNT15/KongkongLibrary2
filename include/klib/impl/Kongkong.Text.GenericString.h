@@ -26,6 +26,9 @@ namespace klib::Kongkong::Text
             /// <param name="p">文字列へのポインター</param>
             constexpr ImplType(ssize_t length, const TChar* p) noexcept;
 
+            [[nodiscard]] constexpr const TChar* begin() const noexcept;
+            [[nodiscard]] constexpr const TChar* end() const noexcept;
+
         public:
 
             /// <summary>
@@ -35,6 +38,12 @@ namespace klib::Kongkong::Text
             [[nodiscard]] constexpr const TChar* c_str() const noexcept;
 
             /// <summary>
+            /// 文字列データを取得
+            /// </summary>
+            /// <returns>データへのポインター</returns>
+            [[nodiscard]] constexpr const TChar* Data() const noexcept;
+
+            /// <summary>
             /// 文字列の長さを取得
             /// </summary>
             /// <returns>文字列の長さ</returns>
@@ -42,7 +51,12 @@ namespace klib::Kongkong::Text
         };
 
     public:
-        KLIB_KONGKONG_OBJECT_OMAJINAI(GenericString, Object)
+        KLIB_KONGKONG_OBJECT_OMAJINAI(GenericString, Object);
+
+        [[nodiscard]] const TChar& operator[](ssize_t index) const;
+
+        [[nodiscard]] const TChar* begin() const;
+        [[nodiscard]] const TChar* end() const;
     };
 }
 
@@ -56,9 +70,51 @@ namespace klib::Kongkong::Text
     }
 
     template <CCharType TChar>
+    constexpr const TChar* GenericString<TChar>::ImplType::begin() const noexcept
+    {
+        return m_p;
+    }
+
+    template <CCharType TChar>
+    constexpr const TChar* GenericString<TChar>::ImplType::end() const noexcept
+    {
+        return m_p + m_length;
+    }
+
+    template <CCharType TChar>
+    constexpr const TChar* GenericString<TChar>::ImplType::c_str() const noexcept
+    {
+        return m_p;
+    }
+
+    template <CCharType TChar>
+    constexpr const TChar* GenericString<TChar>::ImplType::Data() const noexcept
+    {
+        return m_p;
+    }
+
+    template <CCharType TChar>
     constexpr ssize_t GenericString<TChar>::ImplType::Length() const noexcept
     {
         return m_length;
+    }
+
+    template <CCharType TChar>
+    const TChar& GenericString<TChar>::operator[](ssize_t index) const
+    {
+        return *(this->c_str() + index);
+    }
+
+    template <CCharType TChar>
+    const TChar* GenericString<TChar>::begin() const
+    {
+        return Object::GetPointerChecked<ImplType>()->begin();
+    }
+
+    template <CCharType TChar>
+    const TChar* GenericString<TChar>::end() const
+    {
+        return Object::GetPointerChecked<ImplType>()->end();
     }
 }
 
