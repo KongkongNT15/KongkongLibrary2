@@ -1,1 +1,4 @@
-﻿
+﻿namespace klib::Kongkong::Text
+{
+    
+}

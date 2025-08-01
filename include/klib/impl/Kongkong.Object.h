@@ -66,6 +66,8 @@ namespace klib::Kongkong
 
         public:
 
+            constexpr RefCounter() noexcept;
+
             /// <summary>
             /// 参照カウントがこの値の場合はdeleteしない
             /// </summary>
@@ -89,6 +91,8 @@ namespace klib::Kongkong
             /// </summary>
             /// <returns>参照カウント</returns>
             [[nodiscard]] uint64_t GetCount() const noexcept;
+
+            void SetAsNonDeleteObject() noexcept;
         };
     public:
 
@@ -96,6 +100,10 @@ namespace klib::Kongkong
             friend Object;
         private:
             RefCounter m_counter;
+
+        protected:
+
+            void SetAsNonDeleteObject() noexcept;
 
         public:
 
@@ -169,6 +177,7 @@ namespace klib::Kongkong
         [[nodiscard]] constexpr ImplType* GetPointer() const noexcept;
 
         void SetInstance(ImplType* p) noexcept;
+        constexpr void SetInstanceUnsafe(ImplType* p) noexcept;
         void SetInstanceWithAddRef(ImplType* p) noexcept;
 
     public:
@@ -221,9 +230,24 @@ namespace klib::Kongkong
 
 namespace klib::Kongkong
 {
+    constexpr Object::RefCounter::RefCounter() noexcept
+        : m_refCount(1)
+    {
+    }
+
     constexpr uint64_t Object::RefCounter::NonDeleteCount() noexcept
     {
         return ULLONG_MAX;
+    }
+
+    inline void Object::RefCounter::SetAsNonDeleteObject() noexcept
+    {
+        m_refCount = NonDeleteCount();
+    }
+
+    inline void Object::ImplType::SetAsNonDeleteObject() noexcept
+    {
+        m_counter.SetAsNonDeleteObject();
     }
 
     constexpr Object::Pointer::Pointer(Object::ImplType* p) noexcept
@@ -260,6 +284,11 @@ namespace klib::Kongkong
     constexpr Object::ImplType* Object::GetPointer() const noexcept
     {
         return m_p.GetPointer();
+    }
+
+    constexpr void Object::SetInstanceUnsafe(ImplType* p) noexcept
+    {
+        m_p.m_p = p;
     }
 
     constexpr bool operator==(Object const& left, Object const& right) noexcept

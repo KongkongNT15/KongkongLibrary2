@@ -241,6 +241,11 @@ namespace klib::Kongkong::Text
 
     template <CCharType TChar>
     class GenericStaticString;
+
+    class StaticStringHelper;
+
+    template <CCharType TChar, ssize_t N>
+    struct StaticStringHelperResult;
 }
 
 namespace klib::Kongkong::Threading
