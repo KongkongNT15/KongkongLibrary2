@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <concepts>
+#include <compare>
 #include <type_traits>
 
 #if __has_include(<Windows.h>)
@@ -139,6 +140,8 @@
     className& operator=(className const&) = delete; \
     className& operator=(className&&) = delete
 
+#define KLIB_INTERFACE struct
+
 /// <summary>
 /// 既定の名前空間
 /// </summary>
@@ -161,7 +164,12 @@ namespace klib::Kongkong
         ::std::same_as<T, char32_t>;
 
     class GC;
+    class Interface;
     class Object;
+
+    struct Exception;
+    struct InvalidCastException;
+    struct ValueType;
 
     template <CCharType TChar>
     struct GenericString;
@@ -180,7 +188,11 @@ namespace klib::Kongkong::Cli
 /// </summary>
 namespace klib::Kongkong::Containers
 {
+    template <class T>
+    KLIB_INTERFACE IIterable;
 
+    template <class T>
+    KLIB_INTERFACE IReadOnlyIterable;
 }
 
 namespace klib::Kongkong::IO
@@ -196,10 +208,17 @@ namespace klib::Kongkong::Numerics
 
 }
 
+/// <summary>
+/// 文字列関連
+/// </summary>
 namespace klib::Kongkong::Text
 {
-    template <CCharType T>
-    class GenericStringBase;
+
+    template <CCharType TChar>
+    class GenericHeapString;
+
+    template <CCharType TChar>
+    class GenericStaticString;
 }
 
 namespace klib::Kongkong::Threading
@@ -220,12 +239,19 @@ namespace klib::Kongkong
 
 namespace klib::Kongkong::Text
 {
-    using StringBase = GenericStringBase<char16_t>;
-    using CharStringBase = GenericStringBase<char>;
-    using WCharStringBase = GenericStringBase<wchar_t>;
-    using Utf8StringBase = GenericStringBase<char8_t>;
-    using Utf16StringBase = GenericStringBase<char16_t>;
-    using Utf32StringBase = GenericStringBase<char32_t>;
+    using HeapString = GenericHeapString<char16_t>;
+    using HeapCharString = GenericHeapString<char>;
+    using HeapWCharString = GenericHeapString<wchar_t>;
+    using HeapUtf8String = GenericHeapString<char8_t>;
+    using HeapUtf16String = GenericHeapString<char16_t>;
+    using HeapUtf32String = GenericHeapString<char32_t>;
+
+    using StaticString = GenericStaticString<char16_t>;
+    using StaticCharString = GenericStaticString<char>;
+    using StaticWCharString = GenericStaticString<wchar_t>;
+    using StaticUtf8String = GenericStaticString<char8_t>;
+    using StaticUtf16String = GenericStaticString<char16_t>;
+    using StaticUtf32String = GenericStaticString<char32_t>;
 }
 
 #endif //!KLIB_BASE_H

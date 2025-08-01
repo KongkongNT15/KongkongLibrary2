@@ -7,4 +7,8 @@
     #pragma warning(disable:4996)
 #endif
 
+#include <klib/Kongkong.h>
+#include <klib/Kongkong.Containers.h>
+#include <klib/Kongkong.Text.h>
+
 #endif //!ALL_H
