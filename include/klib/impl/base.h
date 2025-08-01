@@ -227,8 +227,14 @@ namespace klib::Kongkong::Numerics
 /// </summary>
 namespace klib::Kongkong::Text
 {
+    template <CCharType TChar, ssize_t N>
+    class GenericBuiltInMutableString;
+
     template <CCharType TChar>
     class GenericString;
+
+    template <CCharType TChar>
+    class GenericFastMutableString;
 
     template <CCharType TChar>
     class GenericHeapString;

@@ -30,5 +30,18 @@
     void Object::SetInstance(ImplType* p) noexcept
     {
         if (p == nullptr) [[unlikely]] throw MemoryAllocationException::OutOfMemory();
+
+        m_p.m_p = p;
+    }
+
+    void Object::SetInstanceWithAddRef(ImplType* p) noexcept
+    {
+        if (p == nullptr) [[unlikely]] throw MemoryAllocationException::OutOfMemory();
+
+        if (p->ReferenceCount() == RefCounter::NonDeleteCount()) return;
+
+        p->m_counter.operator++();
+
+        m_p.m_p = p;
     }
 }

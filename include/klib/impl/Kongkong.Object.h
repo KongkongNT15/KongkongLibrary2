@@ -90,7 +90,7 @@ namespace klib::Kongkong
             /// <returns>参照カウント</returns>
             [[nodiscard]] uint64_t GetCount() const noexcept;
         };
-    protected:
+    public:
 
         struct ImplType {
             friend Object;
@@ -169,7 +169,6 @@ namespace klib::Kongkong
         [[nodiscard]] constexpr ImplType* GetPointer() const noexcept;
 
         void SetInstance(ImplType* p) noexcept;
-        void SetInstanceNullable(ImplType* p) noexcept;
         void SetInstanceWithAddRef(ImplType* p) noexcept;
 
     public:
@@ -179,8 +178,22 @@ namespace klib::Kongkong
 
         [[nodiscard]] ImplType* operator->() const;
 
+        /// <summary>
+        /// キャスト
+        /// </summary>
+        /// <typeparam name="TObj">キャストする型</typeparam>
+        /// <returns>キャスト後のオブジェクト&#xA;不正なキャストの場合はnullptr</returns>
         template <class TObj> requires ::std::derived_from<TObj, Object>
         TObj As() const;
+
+        /// <summary>
+        /// キャスト
+        /// </summary>
+        /// <typeparam name="TObj">キャストする型</typeparam>
+        /// <returns>キャスト後のオブジェクト</returns>
+        /// <exception cref="InvalidCastException">不正なキャストの場合</exception>
+        template <class TObj> requires ::std::derived_from<TObj, Object>
+        TObj Cast() const;
     };
 
     [[nodiscard]] constexpr bool operator==(Object const& left, Object const& right) noexcept;
@@ -355,6 +368,7 @@ namespace klib::Kongkong
     }
 }
 
+#include "Kongkong.InvalidCastException.h"
 #include "Kongkong.NullPointerException.h"
 
 namespace klib::Kongkong
@@ -365,6 +379,49 @@ namespace klib::Kongkong
         if (p == nullptr) [[unlikely]] throw NullPointerException();
 
         return p;
+    }
+
+    template <class TObj> requires ::std::derived_from<TObj, Object>
+    TObj Object::As() const
+    {
+        ImplType* p = GetPointer();
+  
+#if KLIB_COMPILER_MSVC
+        if (dynamic_cast<TObj::ImplType*>(p) != nullptr) [[unlikely]] return nullptr;
+#else
+        try {
+            (void)dynamic_cast<TObj::ImplType*>(p);
+        }
+        catch (...) {
+            return nullptr;
+        }
+#endif
+        TObj obj = nullptr;
+        obj.SetInstance(p1);
+        Object::AddRef(p);
+
+        return obj;
+    }
+
+    template <class TObj> requires ::std::derived_from<TObj, Object>
+    TObj Object::Cast() const
+    {
+        ImplType* p = GetPointer();
+
+#if KLIB_COMPILER_MSVC
+        if (dynamic_cast<TObj::ImplType*>(p) != nullptr) [[unlikely]] throw InvalidCastException();
+#else
+        try {
+            (void)dynamic_cast<TObj::ImplType*>(p);
+        }
+        catch (...) {
+            throw InvalidCastException();
+        }
+#endif
+        TObj obj = nullptr;
+        obj.SetInstanceWithAddRef(p);
+
+        return obj;
     }
 }
 
