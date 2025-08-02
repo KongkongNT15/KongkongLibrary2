@@ -182,6 +182,8 @@ namespace klib::Kongkong
     class Interface;
     class Object;
 
+    struct ArgumentException;
+    struct ArgumentOutOfRangeException;
     struct Exception;
     struct InvalidCastException;
     struct MemoryAllocationException;

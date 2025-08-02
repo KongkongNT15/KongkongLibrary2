@@ -16,7 +16,14 @@ namespace klib::Kongkong::Text
 
         struct ImplType : public Object::ImplType {
         protected:
+            /// <summary>
+            /// 文字列の長さ
+            /// </summary>
             ssize_t m_length;
+
+            /// <summary>
+            /// 文字列へのポインター
+            /// </summary>
             const TChar* m_p;
 
             /// <summary>
@@ -38,6 +45,14 @@ namespace klib::Kongkong::Text
             [[nodiscard]] constexpr const TChar* c_str() const noexcept;
 
             /// <summary>
+            /// 指定したインデックスの文字を取得
+            /// </summary>
+            /// <param name="index">インデックス</param>
+            /// <returns>指定したインデックスの文字</returns>
+            /// <exception cref="ArgumentOutOfRangeException">indexが範囲外の時</exception>
+            [[nodiscard]] constexpr TChar const& At(ssize_t index) const;
+
+            /// <summary>
             /// 文字列データを取得
             /// </summary>
             /// <returns>データへのポインター</returns>
@@ -52,6 +67,9 @@ namespace klib::Kongkong::Text
 
     public:
         KLIB_KONGKONG_OBJECT_OMAJINAI(GenericString, Object);
+
+        GenericString(const TChar* cStr);
+        GenericString(ssize_t length, const TChar* cStr);
 
         [[nodiscard]] const TChar& operator[](ssize_t index) const;
 
@@ -115,6 +133,19 @@ namespace klib::Kongkong::Text
     const TChar* GenericString<TChar>::end() const
     {
         return Object::GetPointerChecked<ImplType>()->end();
+    }
+}
+
+#include "Kongkong.ArgumentOutOfRangeException.h"
+
+namespace klib::Kongkong::Text
+{
+    template <CCharType TChar>
+    constexpr TChar const& GenericString<TChar>::ImplType::At(ssize_t index) const
+    {
+        if (index < 0 || m_length <= index) [[unlikely]] throw ArgumentOutOfRangeException(u"指定したインデックスが範囲外です");
+
+        return m_p[index];
     }
 }
 

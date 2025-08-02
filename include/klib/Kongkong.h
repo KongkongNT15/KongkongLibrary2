@@ -1,6 +1,8 @@
 ﻿#ifndef KLIB_KONGKONG_H
 #define KLIB_KONGKONG_H
 
+#include "impl/Kongkong.ArgumentException.h"
+#include "impl/Kongkong.ArgumentOutOfRangeException.h"
 #include "impl/Kongkong.Exception.h"
 #include "impl/Kongkong.GC.h"
 #include "impl/Kongkong.Interface.h"
