@@ -2,6 +2,7 @@
 #define KLIB_KONGKONG_TEXT_STRINGHELPER_H
 
 #include "base.h"
+#include "Kongkong.Containers.ContainerHelper.h"
 
 namespace klib::Kongkong::Text
 {
@@ -16,13 +17,277 @@ namespace klib::Kongkong::Text
         KLIB_STATIC_CLASS(StringHelper);
 
         /// <summary>
+        /// IndexOf()で要素が見つからなかったときの戻り値
+        /// </summary>
+        [[nodiscard]] static constexpr ssize_t NotFound() noexcept;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static bool CompareUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            ssize_t,
+            const TChar*
+        ) = delete;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static bool CompareUnsafe(
+            ssize_t,
+            const TChar*,
+            ssize_t,
+            ::std::nullptr_t
+        ) = delete;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static bool CompareUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            ssize_t,
+            ::std::nullptr_t
+        ) = delete;
+
+        /// <summary>
+        /// 文字列の順番を判定
+        /// </summary>
+        /// <typeparam name="TChar">文字型</typeparam>
+        /// <param name="lengthLeft">1つめの文字列の長さ</param>
+        /// <param name="left">1つめの文字列</param>
+        /// <param name="lengthRight">2つめの文字列の長さ</param>
+        /// <param name="right">2つめの文字列</param>
+        /// <returns>判定結果</returns>
+        template <CChar TChar>
+        [[nodiscard]] static constexpr ::std::strong_ordering CompareUnsafe(
+            ssize_t lengthLeft,
+            const TChar* left,
+            ssize_t lengthRight,
+            const TChar* right
+        ) noexcept;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static constexpr bool ContainsUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            TChar
+        );
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static constexpr bool ContainsUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            ssize_t,
+            const TChar*
+        );
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static constexpr bool ContainsUnsafe(
+            ssize_t,
+            const TChar*,
+            ssize_t,
+            ::std::nullptr_t
+        );
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static constexpr bool ContainsUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            ssize_t,
+            ::std::nullptr_t
+        );
+
+        /// <summary>
+        /// 文字列に指定の文字が含まれるかを判定
+        /// </summary>
+        /// <typeparam name="TChar">文字型</typeparam>
+        /// <param name="length">文字列の長さ</param>
+        /// <param name="p">文字列へのポインター</param>
+        /// <param name="c">文字</param>
+        /// <returns>判定結果</returns>
+        template <CChar TChar>
+        [[nodiscard]] static constexpr bool ContainsUnsafe(
+            ssize_t length,
+            const TChar* p,
+            TChar c
+        ) noexcept;
+
+        /// <summary>
+        /// 文字列に指定の部分文字列が含まれるかを判定
+        /// </summary>
+        /// <typeparam name="TChar">文字型</typeparam>
+        /// <param name="length">文字列の長さ</param>
+        /// <param name="p">文字列へのポインター</param>
+        /// <param name="lengthSub">部分文字列の長さ</param>
+        /// <param name="sub">部分文字列へのポインター</param>
+        /// <returns>判定結果</returns>
+        template <CChar TChar>
+        [[nodiscard]] static constexpr bool ContainsUnsafe(
+            ssize_t length,
+            const TChar* p,
+            ssize_t lengthSub,
+            const TChar* sub
+        ) noexcept;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        ssize_t GetLengthUnsafe(
+            ::std::nullptr_t
+        ) = delete;
+
+        /// <summary>
         /// 文字列の長さを取得
         /// </summary>
         /// <typeparam name="TChar">文字型</typeparam>
         /// <param name="p">文字列へのポインター</param>
         /// <returns>文字列の長さ</returns>
         template <CChar TChar>
-        static constexpr ssize_t GetLengthUnsafe(const TChar* p) noexcept;
+        static [[nodiscard]] constexpr ssize_t GetLengthUnsafe(
+            const TChar* p
+        ) noexcept;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static bool GreaterThanUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            ssize_t,
+            const TChar*
+        ) = delete;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static bool GreaterThanUnsafe(
+            ssize_t,
+            const TChar*,
+            ssize_t,
+            ::std::nullptr_t
+        ) = delete;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static bool GreaterThanUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            ssize_t,
+            ::std::nullptr_t
+        ) = delete;
+
+        /// <summary>
+        /// 辞書順でleftがrightより後かを確認
+        /// </summary>
+        /// <typeparam name="TChar">文字型</typeparam>
+        /// <param name="lengthLeft">1つめの文字列の長さ</param>
+        /// <param name="left">1つめの文字列</param>
+        /// <param name="lengthRight">2つめの文字列の長さ</param>
+        /// <param name="right">2つめの文字列</param>
+        /// <returns>判定結果</returns>
+        template <CChar TChar>
+        [[nodiscard]] static constexpr bool GreaterThanUnsafe(
+            ssize_t lengthLeft,
+            const TChar* left,
+            ssize_t lengthRight,
+            const TChar* right
+        ) noexcept;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static constexpr ssize_t IndexOfUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            TChar
+        );
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static constexpr ssize_t IndexOfUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            ssize_t,
+            const TChar*
+        );
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static constexpr ssize_t IndexOfUnsafe(
+            ssize_t,
+            const TChar*,
+            ssize_t,
+            ::std::nullptr_t
+        );
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static constexpr ssize_t IndexOfUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            ssize_t,
+            ::std::nullptr_t
+        );
+
+        /// <summary>
+        /// 文字列中の指定の文字の要素番号を取得
+        /// </summary>
+        /// <typeparam name="TChar">文字型</typeparam>
+        /// <param name="length">文字列の長さ</param>
+        /// <param name="p">文字列へのポインター</param>
+        /// <param name="c">文字</param>
+        /// <returns>指定した文字がある要素番号 見つからない場合はNotFound()</returns>
+        template <CChar TChar>
+        [[nodiscard]] static constexpr ssize_t IndexOfUnsafe(
+            ssize_t length,
+            const TChar* p,
+            TChar c
+        ) noexcept;
+
+        /// <summary>
+        /// 文字列中の指定の部分文字列の要素番号を取得
+        /// </summary>
+        /// <typeparam name="TChar">文字型</typeparam>
+        /// <param name="length">文字列の長さ</param>
+        /// <param name="p">文字列へのポインター</param>
+        /// <param name="lengthSub">部分文字列の長さ</param>
+        /// <param name="sub">部分文字列へのポインター</param>
+        /// <returns>指定した部分文字列がある要素番号 見つからない場合はNotFound()</returns>
+        template <CChar TChar>
+        [[nodiscard]] static constexpr ssize_t IndexOfUnsafe(
+            ssize_t length,
+            const TChar* p,
+            ssize_t lengthSub,
+            const TChar* sub
+        ) noexcept;
 
         /// <summary>
         /// ふぁ！？っく
@@ -67,7 +332,57 @@ namespace klib::Kongkong::Text
         /// <param name="right">2つめの文字列</param>
         /// <returns>判定結果</returns>
         template <CChar TChar>
-        KLIB_NODISCARD static constexpr bool IsEqualsUnsafe(
+        [[nodiscard]] static constexpr bool IsEqualsUnsafe(
+            ssize_t lengthLeft,
+            const TChar* left,
+            ssize_t lengthRight,
+            const TChar* right
+        ) noexcept;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static bool LessThanUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            ssize_t,
+            const TChar*
+        ) = delete;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static bool LessThanUnsafe(
+            ssize_t,
+            const TChar*,
+            ssize_t,
+            ::std::nullptr_t
+        ) = delete;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static bool LessThanUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            ssize_t,
+            ::std::nullptr_t
+        ) = delete;
+
+        /// <summary>
+        /// 辞書順でleftがrightより手前かを判定
+        /// </summary>
+        /// <typeparam name="TChar">文字型</typeparam>
+        /// <param name="lengthLeft">1つめの文字列の長さ</param>
+        /// <param name="left">1つめの文字列</param>
+        /// <param name="lengthRight">2つめの文字列の長さ</param>
+        /// <param name="right">2つめの文字列</param>
+        /// <returns>判定結果</returns>
+        template <CChar TChar>
+        [[nodiscard]] static constexpr bool LessThanUnsafe(
             ssize_t lengthLeft,
             const TChar* left,
             ssize_t lengthRight,
@@ -79,6 +394,82 @@ namespace klib::Kongkong::Text
 namespace klib::Kongkong::Text
 {
     template <CChar TChar>
+    constexpr ::std::strong_ordering StringHelper::CompareUnsafe(
+        ssize_t lengthLeft,
+        const TChar* left,
+        ssize_t lengthRight,
+        const TChar* right
+    ) noexcept
+    {
+        ssize_t length = lengthLeft < lengthRight ? lengthLeft : lengthRight;
+
+        const TChar* end = left + length;
+        const TChar* pLeft = left;
+        const TChar* pRight = right;
+
+        while (pLeft != end) {
+            if (*pLeft < *pRight) return ::std::strong_ordering::less;
+            if (*pLeft > *pRight) return ::std::strong_ordering::greater;
+
+            ++pLeft;
+            ++pRight;
+        }
+
+        return true;
+    }
+
+    template <CChar TChar>
+    constexpr bool StringHelper::ContainsUnsafe(
+        ssize_t length,
+        const TChar* p,
+        TChar c
+    ) noexcept
+    {
+        const TChar* end = p + length;
+        while (p != end) {
+            if (*p == c) return true;
+            ++p;
+        }
+
+        return false;
+    }
+
+    template <CChar TChar>
+    constexpr bool StringHelper::ContainsUnsafe(
+        ssize_t length,
+        const TChar* p,
+        ssize_t lengthSub,
+        const TChar* sub
+    ) noexcept
+    {
+        if (lengthSub > length) return false;
+
+        // ここで
+        // lengthSub <= length
+
+        const TChar* itr = p;
+        const TChar* itrSub = sub;
+        const TChar* end = p + lengthSub;
+
+        while (itr != end) {
+            
+            if (*itr != *itrSub) break;
+
+            ++itr;
+            ++itrSub;
+        }
+
+        if (itr == end) return true;
+
+        return ContainsUnsafe(
+            length - 1,
+            p + 1,
+            lengthSub,
+            sub
+        );
+    }
+
+    template <CChar TChar>
     constexpr ssize_t StringHelper::GetLengthUnsafe(const TChar* p) noexcept
     {
         const TChar* p1 = p;
@@ -87,6 +478,84 @@ namespace klib::Kongkong::Text
             if (!*p1) return p1 - p;
             ++p1;
         }
+    }
+
+    template <CChar TChar>
+    constexpr bool StringHelper::GreaterThanUnsafe(
+        ssize_t lengthLeft,
+        const TChar* left,
+        ssize_t lengthRight,
+        const TChar* right
+    ) noexcept
+    {
+        ssize_t length = lengthLeft < lengthRight ? lengthLeft : lengthRight;
+
+        const TChar* end = left + length;
+        const TChar* pLeft = left;
+        const TChar* pRight = right;
+
+        while (pLeft != end) {
+            if (*pLeft < *pRight) return false;
+            if (*pLeft > *pRight) return true;
+
+            ++pLeft;
+            ++pRight;
+        }
+
+        return false;
+    }
+
+    template <CChar TChar>
+    constexpr ssize_t StringHelper::IndexOfUnsafe(
+        ssize_t length,
+        const TChar* p,
+        TChar c
+    ) noexcept
+    {
+        const TChar* itr = p;
+        const TChar* end = p + length;
+
+        while (itr != end) {
+            if (*itr == c) return itr - p;
+            ++itr;
+        }
+
+        return NotFound();
+    }
+
+    template <CChar TChar>
+    constexpr ssize_t StringHelper::IndexOfUnsafe(
+        ssize_t length,
+        const TChar* p,
+        ssize_t lengthSub,
+        const TChar* sub
+    ) noexcept
+    {
+        if (lengthSub > length) return NotFound();
+
+        // ここで
+        // lengthSub <= length
+
+        const TChar* itr = p;
+        const TChar* itrSub = sub;
+        const TChar* end = p + lengthSub;
+
+        while (itr != end) {
+
+            if (*itr != *itrSub) break;
+
+            ++itr;
+            ++itrSub;
+        }
+
+        if (itr == end) return 0;
+
+        return ndexOfUnsafe(
+            length - 1,
+            p + 1,
+            lengthSub,
+            sub
+        ) + 1;
     }
 
     template <CChar TChar>
@@ -111,6 +580,31 @@ namespace klib::Kongkong::Text
         }
 
         return true;
+    }
+
+    template <CChar TChar>
+    constexpr bool StringHelper::LessThanUnsafe(
+        ssize_t lengthLeft,
+        const TChar* left,
+        ssize_t lengthRight,
+        const TChar* right
+    ) noexcept
+    {
+        ssize_t length = lengthLeft < lengthRight ? lengthLeft : lengthRight;
+
+        const TChar* end = left + length;
+        const TChar* pLeft = left;
+        const TChar* pRight = right;
+
+        while (pLeft != end) {
+            if (*pLeft > *pRight) return false;
+            if (*pLeft < *pRight) return true;
+
+            ++pLeft;
+            ++pRight;
+        }
+
+        return false;
     }
 }
 

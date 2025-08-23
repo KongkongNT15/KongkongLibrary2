@@ -8,7 +8,9 @@ namespace klib::Kongkong::Text
 {
 	template <CChar TChar>
 	class GenericHeapString : public GenericString<TChar> {
+	private:
 
+	public:
 	};
 }
 

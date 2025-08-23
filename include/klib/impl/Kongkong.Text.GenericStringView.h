@@ -2,35 +2,20 @@
 #define KLIB_KONGKONG_TEXT_GENERICSTRINGVIEW_H
 
 #include "base.h"
-#include "Kongkong.ValueType.h"
-#include "Kongkong.NonType.h"
-#include "Kongkong.Text.StringHelper.h"
-
-#include <iosfwd>
+#include "Kongkong.Text.GenericFastStringBase.h"
 
 namespace klib::Kongkong::Text
 {
 	/// <summary>
 	/// 文字列ビュー
 	/// </summary>
-	/// <typeparam name="TChar"></typeparam>
+	/// <typeparam name="TChar">文字型</typeparam>
 	template <CChar TChar>
-	struct GenericStringView final : public ValueType {
+	struct GenericStringView final : public GenericFastStringBase<TChar> {
 	public:
-		/// <summary>
-		/// 要素型
-		/// </summary>
-		using ElementType = TChar;
+		using Base = GenericFastStringBase<TChar>;
+		using ElementType = typename Base::ElementType;
 	private:
-		/// <summary>
-		/// 参照する文字列の長さ
-		/// </summary>
-		ssize_t m_length;
-
-		/// <summary>
-		/// 文字列へのポインター
-		/// </summary>
-		const ElementType* m_p;
 
 		/// <summary>
 		/// 安全性を確認せずにオブジェクトを構築
@@ -61,7 +46,7 @@ namespace klib::Kongkong::Text
 		/// </summary>
 		/// <param name="p">文字列へのポインター</param>
 		/// <returns>構築されたオブジェクト</returns>
-		KLIB_NODISCARD static constexpr GenericStringView CreateUnsafe(
+		[[nodiscard]] static constexpr GenericStringView CreateUnsafe(
 			const ElementType* p
 		) noexcept;
 
@@ -71,27 +56,21 @@ namespace klib::Kongkong::Text
 		/// <param name="length">参照する文字列の長さ</param>
 		/// <param name="p">文字列へのポインター</param>
 		/// <returns>構築されたオブジェクト</returns>
-		KLIB_NODISCARD static constexpr GenericStringView CreateUnsafe(
+		[[nodiscard]] static constexpr GenericStringView CreateUnsafe(
 			ssize_t length,
 			const ElementType* p
 		) noexcept;
 
-		KLIB_NODISCARD constexpr const ElementType* begin() const noexcept;
-		KLIB_NODISCARD constexpr const ElementType* end() const noexcept;
+		GenericStringView(GenericStringView const&) = default;
+		GenericStringView(GenericStringView&&) = default;
 
-		/// <summary>
-		/// 文字列へのポインターを取得
-		/// </summary>
-		KLIB_NODISCARD constexpr const ElementType* Data() const noexcept;
+		GenericStringView& operator=(GenericStringView const&) = default;
+		GenericStringView& operator=(GenericStringView&&) = default;
 
-		/// <summary>
-		/// 文字列の長さを取得
-		/// </summary>
-		KLIB_NODISCARD constexpr ssize_t Length() const noexcept;
+		
 	};
 
-	template <CChar TChar>
-	KLIB_NODISCARD constexpr bool operator==(GenericStringView<TChar> left, GenericStringView<TChar> right) noexcept;
+	
 }
 
 namespace klib::Kongkong::Text
@@ -134,51 +113,6 @@ namespace klib::Kongkong::Text
 		return GenericStringView<TChar>(length, p, {});
 	}
 
-	template <CChar TChar>
-	constexpr const GenericStringView<TChar>::ElementType* GenericStringView<TChar>::begin() const noexcept
-	{
-		return m_p;
-	}
-
-	template <CChar TChar>
-	constexpr const GenericStringView<TChar>::ElementType* GenericStringView<TChar>::end() const noexcept
-	{
-		return m_p + m_length;
-	}
-
-	template <CChar TChar>
-	constexpr const GenericStringView<TChar>::ElementType* GenericStringView<TChar>::Data() const noexcept
-	{
-		return m_p;
-	}
-
-	template <CChar TChar>
-	constexpr ssize_t GenericStringView<TChar>::Length() const noexcept
-	{
-		return m_length;
-	}
-
-	template <CChar TChar>
-	constexpr bool operator==(GenericStringView<TChar> left, GenericStringView<TChar> right) noexcept
-	{
-		return StringHelper::IsEqualsUnsafe(
-			left.Length(),
-			left.Data(),
-			right.Length(),
-			right.Data()
-		);
-	}
-
-	template <CChar TChar>
-	constexpr bool operator!=(GenericStringView<TChar> left, GenericStringView<TChar> right) noexcept
-	{
-		return !(left == right);
-	}
-}
-
-namespace std
-{
-	ostream& operator<<(ostream& out, ::klib::Kongkong::Text::CharStringView view);
 }
 
 #endif //!KLIB_KONGKONG_TEXT_GENERICSTRINGVIEW_H

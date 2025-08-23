@@ -5,7 +5,7 @@
 
 namespace std
 {
-	ostream& operator<<(ostream& out, ::klib::Kongkong::Text::CharStringView view)
+	ostream& operator<<(ostream& out, ::klib::Kongkong::Text::FastCharStringBase const& view)
 	{
 		return out.write(view.Data(), static_cast<streamsize>(view.Length()));
 	}

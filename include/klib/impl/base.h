@@ -131,12 +131,6 @@
     #define KLIB_ENV_X64 0
 #endif
 
-#if KLIB_HAS_CPP17
-    #define KLIB_NODISCARD [[nodiscard]]
-#else
-    #define KLIB_NODISCARD
-#endif
-
 #if KLIB_HAS_CPP20
     #define KLIB_LIKELY [[likely]]
     #define KLIB_UNLIKELY [[unlikely]]
@@ -231,6 +225,8 @@ namespace klib::Kongkong::Containers
 
     template <class T>
     KLIB_INTERFACE IReadOnlyIterable;
+
+    class ContainerHelper;
 }
 
 namespace klib::Kongkong::IO
@@ -288,8 +284,11 @@ namespace klib::Kongkong::Text
         ::std::same_as<T, char16_t> ||
         ::std::same_as<T, char32_t>;
 
+    template <CChar TChar>
+    struct GenericFastStringBase;
+
     template <CChar TChar, ssize_t N>
-    class GenericBuiltInMutableString;
+    struct GenericStaticMutableString;
 
     template <CChar TChar>
     class GenericString;
@@ -333,6 +332,13 @@ namespace klib::Kongkong::Text
     using Utf16String = GenericString<char16_t>;
     using Utf32String = GenericString<char32_t>;
 
+    using FastStringBase = GenericFastStringBase<char16_t>;
+    using FastCharStringBase = GenericFastStringBase<char>;
+    using FastWCharStringBase = GenericFastStringBase<wchar_t>;
+    using FastUtf8StringBase = GenericFastStringBase<char8_t>;
+    using FastUtf16StringBase = GenericFastStringBase<char16_t>;
+    using FastUtf32StringBase = GenericFastStringBase<char32_t>;
+
     using HeapString = GenericHeapString<char16_t>;
     using HeapCharString = GenericHeapString<char>;
     using HeapWCharString = GenericHeapString<wchar_t>;
@@ -346,6 +352,24 @@ namespace klib::Kongkong::Text
     using StaticUtf8String = GenericStaticString<char8_t>;
     using StaticUtf16String = GenericStaticString<char16_t>;
     using StaticUtf32String = GenericStaticString<char32_t>;
+
+    template <ssize_t N>
+    using StaticMutableString = GenericStaticMutableString<char16_t, N>;
+
+    template <ssize_t N>
+    using StaticMutableCharString = GenericStaticMutableString<char, N>;
+
+    template <ssize_t N>
+    using StaticMutableWCharString = GenericStaticMutableString<wchar_t, N>;
+
+    template <ssize_t N>
+    using StaticMutableUtf8String = GenericStaticMutableString<char8_t, N>;
+
+    template <ssize_t N>
+    using StaticMutableUtf16String = GenericStaticMutableString<char16_t, N>;
+
+    template <ssize_t N>
+    using StaticMutableUtf32String = GenericStaticMutableString<char32_t, N>;
 
     using StringView = GenericStringView<char16_t>;
     using CharStringView = GenericStringView<char>;
