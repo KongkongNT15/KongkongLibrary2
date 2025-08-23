@@ -10,7 +10,7 @@ namespace klib::Kongkong::Text
     /// 静的領域に配置される文字列
     /// </summary>
     /// <typeparam name="TChar">文字型</typeparam>
-    template <CCharType TChar>
+    template <CChar TChar>
     class GenericStaticString : public GenericString<TChar> {
     public:
         /// <summary>
@@ -38,7 +38,7 @@ namespace klib::Kongkong::Text
 
 namespace klib::Kongkong::Text
 {
-    template <CCharType TChar>
+    template <CChar TChar>
     constexpr GenericStaticString<TChar>::GenericStaticString(ImplType& value) noexcept
         : GenericString<TChar>(nullptr)
     {

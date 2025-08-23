@@ -131,6 +131,34 @@
     #define KLIB_ENV_X64 0
 #endif
 
+#if KLIB_HAS_CPP17
+    #define KLIB_NODISCARD [[nodiscard]]
+#else
+    #define KLIB_NODISCARD
+#endif
+
+#if KLIB_HAS_CPP20
+    #define KLIB_LIKELY [[likely]]
+    #define KLIB_UNLIKELY [[unlikely]]
+#else
+    #define KLIB_LIKELY 
+    #define KLIB_UNLIKELY
+#endif
+
+#if KLIB_HAS_CPP20
+    #define KLIB_CPP20_CONSTEXPR constexpr
+#else
+    #define KLIB_CPP20_CONSTEXPR
+#endif
+
+#if KLIB_HAS_CPP23
+    #define KLIB_CPP23_CONSTEXPR constexpr
+    #define KLIB_CPP23_CONSTEXPR_OR_INLINE constexpr
+#else
+    #define KLIB_CPP23_CONSTEXPR
+    #define KLIB_CPP23_CONSTEXPR_OR_INLINE inline
+#endif
+
 // インスタンス化できないようにする
 #define KLIB_STATIC_CLASS(className) \
     className() = delete; \
@@ -171,12 +199,14 @@ namespace klib
 namespace klib::Kongkong
 {
     template <class T>
-    concept CCharType =
+    concept CChar =
         ::std::same_as<T, char> ||
         ::std::same_as<T, wchar_t> ||
         ::std::same_as<T, char8_t> ||
         ::std::same_as<T, char16_t> ||
         ::std::same_as<T, char32_t>;
+
+    
 
     class GC;
     class Interface;
@@ -221,7 +251,36 @@ namespace klib::Kongkong::IO
 /// </summary>
 namespace klib::Kongkong::Numerics
 {
+    /// <summary>
+    /// 浮動小数点数
+    /// </summary>
+    template <class T>
+    concept CFloat = ::std::floating_point<T>;
 
+    /// <summary>
+    /// 数値型
+    /// </summary>
+    template <class T>
+    concept CNumber =
+        (::std::integral<T> || ::std::floating_point<T>) &&
+        (::std::same_as<T, bool> == false);
+
+    /// <summary>
+    /// 符号付き数値型
+    /// </summary>
+    template <class T>
+    concept CSignedNumber =
+        (::std::signed_integral<T> || ::std::floating_point<T>);
+
+    /// <summary>
+    /// 符号なし数値型
+    /// </summary>
+    template <class T>
+    concept CUnsignedNumber =
+        ::std::unsigned_integral<T> &&
+        ::std::same_as<T, bool> == false;
+
+    class Math;
 }
 
 /// <summary>
@@ -229,24 +288,24 @@ namespace klib::Kongkong::Numerics
 /// </summary>
 namespace klib::Kongkong::Text
 {
-    template <CCharType TChar, ssize_t N>
+    template <CChar TChar, ssize_t N>
     class GenericBuiltInMutableString;
 
-    template <CCharType TChar>
+    template <CChar TChar>
     class GenericString;
 
-    template <CCharType TChar>
+    template <CChar TChar>
     class GenericFastMutableString;
 
-    template <CCharType TChar>
+    template <CChar TChar>
     class GenericHeapString;
 
-    template <CCharType TChar>
+    template <CChar TChar>
     class GenericStaticString;
 
     class StaticStringHelper;
 
-    template <CCharType TChar, ssize_t N>
+    template <CChar TChar, ssize_t N>
     struct StaticStringHelperResult;
 }
 

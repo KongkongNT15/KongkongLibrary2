@@ -10,7 +10,7 @@ namespace klib::Kongkong::Text
     /// 文字列クラス
     /// </summary>
     /// <typeparam name="TChar">文字型</typeparam>
-    template <CCharType TChar>
+    template <CChar TChar>
     class GenericString : public Object {
     protected:
 
@@ -33,8 +33,8 @@ namespace klib::Kongkong::Text
             /// <param name="p">文字列へのポインター</param>
             constexpr ImplType(ssize_t length, const TChar* p) noexcept;
 
-            [[nodiscard]] constexpr const TChar* begin() const noexcept;
-            [[nodiscard]] constexpr const TChar* end() const noexcept;
+            KLIB_NODISCARD constexpr const TChar* begin() const noexcept;
+            KLIB_NODISCARD constexpr const TChar* end() const noexcept;
 
         public:
 
@@ -42,7 +42,7 @@ namespace klib::Kongkong::Text
             /// Cスタイル文字列に変換
             /// </summary>
             /// <returns>文字列へのポインター</returns>
-            [[nodiscard]] constexpr const TChar* c_str() const noexcept;
+            KLIB_NODISCARD constexpr const TChar* c_str() const noexcept;
 
             /// <summary>
             /// 指定したインデックスの文字を取得
@@ -50,19 +50,19 @@ namespace klib::Kongkong::Text
             /// <param name="index">インデックス</param>
             /// <returns>指定したインデックスの文字</returns>
             /// <exception cref="ArgumentOutOfRangeException">indexが範囲外の時</exception>
-            [[nodiscard]] constexpr TChar const& At(ssize_t index) const;
+            KLIB_NODISCARD constexpr TChar const& At(ssize_t index) const;
 
             /// <summary>
             /// 文字列データを取得
             /// </summary>
             /// <returns>データへのポインター</returns>
-            [[nodiscard]] constexpr const TChar* Data() const noexcept;
+            KLIB_NODISCARD constexpr const TChar* Data() const noexcept;
 
             /// <summary>
             /// 文字列の長さを取得
             /// </summary>
             /// <returns>文字列の長さ</returns>
-            [[nodiscard]] constexpr ssize_t Length() const noexcept;
+            KLIB_NODISCARD constexpr ssize_t Length() const noexcept;
         };
 
     public:
@@ -71,65 +71,65 @@ namespace klib::Kongkong::Text
         GenericString(const TChar* cStr);
         GenericString(ssize_t length, const TChar* cStr);
 
-        [[nodiscard]] const TChar& operator[](ssize_t index) const;
+        KLIB_NODISCARD const TChar& operator[](ssize_t index) const;
 
-        [[nodiscard]] const TChar* begin() const;
-        [[nodiscard]] const TChar* end() const;
+        KLIB_NODISCARD const TChar* begin() const;
+        KLIB_NODISCARD const TChar* end() const;
     };
 }
 
 namespace klib::Kongkong::Text
 {
-    template <CCharType TChar>
+    template <CChar TChar>
     constexpr GenericString<TChar>::ImplType::ImplType(ssize_t length, const TChar* p) noexcept
         : m_length(length)
         , m_p(p)
     {
     }
 
-    template <CCharType TChar>
+    template <CChar TChar>
     constexpr const TChar* GenericString<TChar>::ImplType::begin() const noexcept
     {
         return m_p;
     }
 
-    template <CCharType TChar>
+    template <CChar TChar>
     constexpr const TChar* GenericString<TChar>::ImplType::end() const noexcept
     {
         return m_p + m_length;
     }
 
-    template <CCharType TChar>
+    template <CChar TChar>
     constexpr const TChar* GenericString<TChar>::ImplType::c_str() const noexcept
     {
         return m_p;
     }
 
-    template <CCharType TChar>
+    template <CChar TChar>
     constexpr const TChar* GenericString<TChar>::ImplType::Data() const noexcept
     {
         return m_p;
     }
 
-    template <CCharType TChar>
+    template <CChar TChar>
     constexpr ssize_t GenericString<TChar>::ImplType::Length() const noexcept
     {
         return m_length;
     }
 
-    template <CCharType TChar>
+    template <CChar TChar>
     const TChar& GenericString<TChar>::operator[](ssize_t index) const
     {
         return *(this->c_str() + index);
     }
 
-    template <CCharType TChar>
+    template <CChar TChar>
     const TChar* GenericString<TChar>::begin() const
     {
         return Object::GetPointerChecked<ImplType>()->begin();
     }
 
-    template <CCharType TChar>
+    template <CChar TChar>
     const TChar* GenericString<TChar>::end() const
     {
         return Object::GetPointerChecked<ImplType>()->end();
@@ -140,7 +140,7 @@ namespace klib::Kongkong::Text
 
 namespace klib::Kongkong::Text
 {
-    template <CCharType TChar>
+    template <CChar TChar>
     constexpr TChar const& GenericString<TChar>::ImplType::At(ssize_t index) const
     {
         if (index < 0 || m_length <= index) [[unlikely]] throw ArgumentOutOfRangeException(u"指定したインデックスが範囲外です");

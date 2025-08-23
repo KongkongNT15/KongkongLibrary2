@@ -11,7 +11,7 @@ namespace klib::Kongkong::Text
 	/// 
 	/// </summary>
 	/// <typeparam name="TChar">文字型</typeparam>
-	template <CCharType TChar, ssize_t N>
+	template <CChar TChar, ssize_t N>
 	struct StaticStringHelperResult : public ValueType {
 	private:
 		GenericStaticString<TChar> m_ref;
