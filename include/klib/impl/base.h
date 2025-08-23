@@ -198,15 +198,6 @@ namespace klib
 /// </summary>
 namespace klib::Kongkong
 {
-    template <class T>
-    concept CChar =
-        ::std::same_as<T, char> ||
-        ::std::same_as<T, wchar_t> ||
-        ::std::same_as<T, char8_t> ||
-        ::std::same_as<T, char16_t> ||
-        ::std::same_as<T, char32_t>;
-
-    
 
     class GC;
     class Interface;
@@ -217,6 +208,7 @@ namespace klib::Kongkong
     struct Exception;
     struct InvalidCastException;
     struct MemoryAllocationException;
+    struct NonType;
     struct NullPointerException;
     struct ValueType;
 }
@@ -288,6 +280,14 @@ namespace klib::Kongkong::Numerics
 /// </summary>
 namespace klib::Kongkong::Text
 {
+    template <class T>
+    concept CChar =
+        ::std::same_as<T, char> ||
+        ::std::same_as<T, wchar_t> ||
+        ::std::same_as<T, char8_t> ||
+        ::std::same_as<T, char16_t> ||
+        ::std::same_as<T, char32_t>;
+
     template <CChar TChar, ssize_t N>
     class GenericBuiltInMutableString;
 
@@ -304,6 +304,10 @@ namespace klib::Kongkong::Text
     class GenericStaticString;
 
     class StaticStringHelper;
+    class StringHelper;
+
+    template <CChar TChar>
+    struct GenericStringView;
 
     template <CChar TChar, ssize_t N>
     struct StaticStringHelperResult;
@@ -342,6 +346,13 @@ namespace klib::Kongkong::Text
     using StaticUtf8String = GenericStaticString<char8_t>;
     using StaticUtf16String = GenericStaticString<char16_t>;
     using StaticUtf32String = GenericStaticString<char32_t>;
+
+    using StringView = GenericStringView<char16_t>;
+    using CharStringView = GenericStringView<char>;
+    using WCharStringView = GenericStringView<wchar_t>;
+    using Utf8StringView = GenericStringView<char8_t>;
+    using Utf16StringView = GenericStringView<char16_t>;
+    using Utf32StringView = GenericStringView<char32_t>;
 }
 
 #endif //!KLIB_BASE_H

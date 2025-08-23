@@ -66,7 +66,7 @@ namespace klib::Kongkong::Text
         };
 
     public:
-        KLIB_KONGKONG_OBJECT_OMAJINAI(GenericString, Object);
+        KLIB_KONGKONG_OBJECT_OMAJINAI(GenericString, Object)
 
         GenericString(const TChar* cStr);
         GenericString(ssize_t length, const TChar* cStr);

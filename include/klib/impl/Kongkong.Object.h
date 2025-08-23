@@ -8,13 +8,13 @@
     constexpr type(::std::nullptr_t) noexcept : base(nullptr) {}
 
 #define KLIB_KONGKONG_OBJECT_OPERATOR_UNSAFE \
-    [[nodiscard]] constexpr ImplType* operator->() const noexcept \
+    KLIB_NODISCARD constexpr ImplType* operator->() const noexcept \
     { \
         return static_cast<ImplType*>(Object::GetPointer()); \
     }
 
 #define KLIB_KONGKONG_OBJECT_OPERATOR \
-    [[nodiscard]] constexpr ImplType* operator->() const noexcept \
+    KLIB_NODISCARD constexpr ImplType* operator->() const noexcept \
     { \
         auto p = Object::GetPointer(); \
         if (p == nullptr) [[unlikely]] throw NullPointerException(); \
@@ -75,7 +75,7 @@ namespace klib::Kongkong
             /// 参照カウントがこの値の場合はdeleteしない
             /// </summary>
             /// <returns>deleteすべきでない参照カウント</returns>
-            [[nodiscard]] static constexpr uint64_t NonDeleteCount() noexcept;
+            KLIB_NODISCARD static constexpr uint64_t NonDeleteCount() noexcept;
 
             /// <summary>
             /// 参照カウントを1増やす
@@ -93,7 +93,7 @@ namespace klib::Kongkong
             /// 参照カウントを取得
             /// </summary>
             /// <returns>参照カウント</returns>
-            [[nodiscard]] uint64_t GetCount() const noexcept;
+            KLIB_NODISCARD uint64_t GetCount() const noexcept;
 
             void SetAsNonDeleteObject() noexcept;
         };
@@ -116,13 +116,13 @@ namespace klib::Kongkong
             /// このオブジェクトの参照カウントを取得
             /// </summary>
             /// <returns>参照カウント</returns>
-            [[nodiscard]] uint64_t ReferenceCount() const noexcept;
+            KLIB_NODISCARD uint64_t ReferenceCount() const noexcept;
 
             /// <summary>
             /// 文字列に変換
             /// </summary>
             /// <returns></returns>
-            [[nodiscard]] virtual String ToString() const;
+            KLIB_NODISCARD virtual String ToString() const;
         };
 
     private:
@@ -152,7 +152,7 @@ namespace klib::Kongkong
             /// 実態へのポインターを取得
             /// </summary>
             /// <returns>実態へのポインター</returns>
-            [[nodiscard]] constexpr ImplType* GetPointer() const noexcept;
+            KLIB_NODISCARD constexpr ImplType* GetPointer() const noexcept;
         };
         
         Pointer m_p;
@@ -177,7 +177,7 @@ namespace klib::Kongkong
         /// 実態へのポインターを取得
         /// </summary>
         /// <returns>実態へのポインター</returns>
-        [[nodiscard]] constexpr ImplType* GetPointer() const noexcept;
+        KLIB_NODISCARD constexpr ImplType* GetPointer() const noexcept;
 
         template <class TImpl> requires ::std::derived_from<TImpl, ImplType>
         constexpr TImpl* GetPointerChecked() const;
@@ -191,7 +191,7 @@ namespace klib::Kongkong
         Object();
         constexpr Object(::std::nullptr_t) noexcept;
 
-        [[nodiscard]] constexpr ImplType* operator->() const;
+        KLIB_NODISCARD constexpr ImplType* operator->() const;
 
         /// <summary>
         /// キャスト
@@ -211,27 +211,27 @@ namespace klib::Kongkong
         TObj Cast() const;
     };
 
-    [[nodiscard]] constexpr bool operator==(Object const& left, Object const& right) noexcept;
-    [[nodiscard]] constexpr bool operator==(Object const& left, ::std::nullptr_t) noexcept;
-    [[nodiscard]] constexpr bool operator==(::std::nullptr_t, Object const& right) noexcept;
-    [[nodiscard]] constexpr bool operator!=(Object const& left, Object const& right) noexcept;
-    [[nodiscard]] constexpr bool operator!=(Object const& left, ::std::nullptr_t) noexcept;
-    [[nodiscard]] constexpr bool operator!=(::std::nullptr_t, Object const& right) noexcept;
-    [[nodiscard]] constexpr bool operator<(Object const& left, Object const& right) noexcept;
-    [[nodiscard]] constexpr bool operator<(Object const& left, ::std::nullptr_t) noexcept;
-    [[nodiscard]] constexpr bool operator<(::std::nullptr_t, Object const& right) noexcept;
-    [[nodiscard]] constexpr bool operator<=(Object const& left, Object const& right) noexcept;
-    [[nodiscard]] constexpr bool operator<=(Object const& left, ::std::nullptr_t) noexcept;
-    [[nodiscard]] constexpr bool operator<=(::std::nullptr_t, Object const& right) noexcept;
-    [[nodiscard]] constexpr bool operator>(Object const& left, Object const& right) noexcept;
-    [[nodiscard]] constexpr bool operator>(Object const& left, ::std::nullptr_t) noexcept;
-    [[nodiscard]] constexpr bool operator>(::std::nullptr_t, Object const& right) noexcept;
-    [[nodiscard]] constexpr bool operator>=(Object const& left, Object const& right) noexcept;
-    [[nodiscard]] constexpr bool operator>=(Object const& left, ::std::nullptr_t) noexcept;
-    [[nodiscard]] constexpr bool operator>=(::std::nullptr_t, Object const& right) noexcept;
-    [[nodiscard]] constexpr ::std::strong_ordering operator<=>(Object const& left, Object const& right) noexcept;
-    [[nodiscard]] constexpr ::std::strong_ordering operator<=>(Object const& left, ::std::nullptr_t) noexcept;
-    [[nodiscard]] constexpr ::std::strong_ordering operator<=>(::std::nullptr_t, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr bool operator==(Object const& left, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr bool operator==(Object const& left, ::std::nullptr_t) noexcept;
+    KLIB_NODISCARD constexpr bool operator==(::std::nullptr_t, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr bool operator!=(Object const& left, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr bool operator!=(Object const& left, ::std::nullptr_t) noexcept;
+    KLIB_NODISCARD constexpr bool operator!=(::std::nullptr_t, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr bool operator<(Object const& left, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr bool operator<(Object const& left, ::std::nullptr_t) noexcept;
+    KLIB_NODISCARD constexpr bool operator<(::std::nullptr_t, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr bool operator<=(Object const& left, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr bool operator<=(Object const& left, ::std::nullptr_t) noexcept;
+    KLIB_NODISCARD constexpr bool operator<=(::std::nullptr_t, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr bool operator>(Object const& left, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr bool operator>(Object const& left, ::std::nullptr_t) noexcept;
+    KLIB_NODISCARD constexpr bool operator>(::std::nullptr_t, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr bool operator>=(Object const& left, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr bool operator>=(Object const& left, ::std::nullptr_t) noexcept;
+    KLIB_NODISCARD constexpr bool operator>=(::std::nullptr_t, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr ::std::strong_ordering operator<=>(Object const& left, Object const& right) noexcept;
+    KLIB_NODISCARD constexpr ::std::strong_ordering operator<=>(Object const& left, ::std::nullptr_t) noexcept;
+    KLIB_NODISCARD constexpr ::std::strong_ordering operator<=>(::std::nullptr_t, Object const& right) noexcept;
 }
 
 namespace klib::Kongkong

@@ -8,6 +8,7 @@
 #include "impl/Kongkong.Interface.h"
 #include "impl/Kongkong.InvalidCastException.h"
 #include "impl/Kongkong.MemoryAllocationException.h"
+#include "impl/Kongkong.NonType.h"
 #include "impl/Kongkong.NullPointerException.h"
 #include "impl/Kongkong.Object.h"
 #include "impl/Kongkong.ValueType.h"

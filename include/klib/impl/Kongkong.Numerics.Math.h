@@ -25,7 +25,9 @@ namespace klib::Kongkong::Numerics
         /// <param name="value">値</param>
         /// <returns>絶対値化した値</returns>
         template <CSignedNumber TNum>
-        KLIB_NODISCARD static KLIB_CPP23_CONSTEXPR TNum Abs(TNum value) noexcept;
+        KLIB_NODISCARD static KLIB_CPP23_CONSTEXPR TNum Abs(
+            TNum value
+        ) noexcept;
 
         /// <summary>
         /// (x * y) + zを計算
@@ -34,7 +36,11 @@ namespace klib::Kongkong::Numerics
         /// <param name="y">数値</param>
         /// <param name="z">数値</param>
         /// <returns>計算結果</returns>
-        KLIB_NODISCARD static KLIB_CPP23_CONSTEXPR double FusedMultiplyAdd(double x, double y, double z) noexcept;
+        KLIB_NODISCARD static KLIB_CPP23_CONSTEXPR double FusedMultiplyAdd(
+            double x,
+            double y,
+            double z
+        ) noexcept;
 
         /// <summary>
         /// 円周率
