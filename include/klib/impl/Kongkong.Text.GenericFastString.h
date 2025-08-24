@@ -4,6 +4,7 @@
 #include "base.h"
 #include "Kongkong.NonType.h"
 #include "Kongkong.Text.GenericFastStringBase.h"
+#include "Kongkong.Text.GenericStringMemory.h"
 
 namespace klib::Kongkong::Text
 {
@@ -14,7 +15,14 @@ namespace klib::Kongkong::Text
     template <CChar TChar>
     struct GenericFastString : public GenericFastStringBase<TChar> {
     public:
+        /// <summary>
+        /// 基底クラス
+        /// </summary>
         using Base = GenericFastStringBase<TChar>;
+
+        /// <summary>
+        /// 要素型
+        /// </summary>
         using ElementType = typename Base::ElementType;
     private:
         /// <summary>
@@ -44,6 +52,20 @@ namespace klib::Kongkong::Text
         );
 
         /// <summary>
+        /// 文字列を連結
+        /// </summary>
+        /// <param name="str1">連結する文字列</param>
+        /// <param name="str2">連結する文字列</param>
+        /// <param name="str3">連結する文字列</param>
+        /// <returns>連結された文字列</returns>
+        /// <exception cref="MemoryAllocationException">メモリを確保できなかった時</exception>
+        [[nodiscard]] static GenericFastString Concat(
+            GenericFastStringBase<TChar> const& str1,
+            GenericFastStringBase<TChar> const& str2,
+            GenericFastStringBase<TChar> const& str3
+        );
+
+        /// <summary>
         /// 文字列リテラルから作成
         /// </summary>
         /// <typeparam name="N">文字配列の要素数</typeparam>
@@ -56,9 +78,28 @@ namespace klib::Kongkong::Text
         );
 
         /// <summary>
+        /// メモリから作成
+        /// </summary>
+        /// <param name="memory">メモリ領域</param>
+        /// <returns>構築されたオブジェクト</returns>
+        [[nodiscard]] static constexpr GenericFastString FromMemoryUnsafe(
+            GenericStringMemory<TChar> const& memory
+        ) noexcept;
+
+        /// <summary>
         /// 文字列をコピー
         /// </summary>
         /// <param name="right">コピー元の値</param>
+        /// <exception cref="MemoryAllocationException">メモリを確保できなかった時</exception>
+        GenericFastString(
+            Base const& right
+        );
+
+        /// <summary>
+        /// 文字列をコピー
+        /// </summary>
+        /// <param name="right">コピー元の値</param>
+        /// <exception cref="MemoryAllocationException">メモリを確保できなかった時</exception>
         GenericFastString(
             GenericFastString const& right
         );
@@ -75,6 +116,10 @@ namespace klib::Kongkong::Text
         /// 確保したメモリの開放
         /// </summary>
         constexpr ~GenericFastString();
+
+        GenericFastString& operator=(
+            Base const& right
+        );
 
         GenericFastString& operator=(
             GenericFastString const& right
@@ -96,7 +141,7 @@ namespace klib::Kongkong::Text
 {
     template <CChar TChar>
     template <ssize_t N>
-    [[nodiscard]] static GenericFastString<TChar> GenericFastString<TChar>::FromLiteral(
+    GenericFastString<TChar> GenericFastString<TChar>::FromLiteral(
         const ElementType(&arr)[N]
     )
     {
@@ -108,13 +153,35 @@ namespace klib::Kongkong::Text
     }
 
     template <CChar TChar>
+    constexpr GenericFastString<TChar> GenericFastString<TChar>::FromMemoryUnsafe(
+        GenericStringMemory<TChar> const& memory
+    ) noexcept
+    {
+        return GenericFastString(
+            memory.Capacity() - 1,
+            memory.Pointer()
+            {}
+        );
+    }
+
+    template <CChar TChar>
     GenericFastString<TChar>::GenericFastString(
-        GenericFastString<TChar> const& right
+        Base const& right
     )
         : GenericFastString(
             right.Length(),
             right.Data(),
             {}
+        )
+    {
+    }
+
+    template <CChar TChar>
+    GenericFastString<TChar>::GenericFastString(
+        GenericFastString<TChar> const& right
+    )
+        : GenericFastString(
+            static_cast<Base const&>(right)
         )
     {
     }
@@ -136,6 +203,14 @@ namespace klib::Kongkong::Text
     {
         if (this->m_p == nullptr) return;
         delete[] this->m_p;
+    }
+
+    template <CChar TChar>
+    GenericFastString<TChar>& GenericFastString<TChar>::operator=(
+        GenericFastString<TChar> const& right
+    )
+    {
+        return operator=(static_cast<Base const&>(right));
     }
 
     template <CChar TChar>
