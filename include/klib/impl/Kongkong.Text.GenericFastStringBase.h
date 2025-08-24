@@ -163,8 +163,8 @@ namespace klib::Kongkong::Text
     /// 2つの文字列の値がすべて等しいかを判定
     /// </summary>
     /// <typeparam name="TChar">文字型</typeparam>
-    /// <param name="left">文字列ビュー</param>
-    /// <param name="right">文字列ビュー</param>
+    /// <param name="left">文字列</param>
+    /// <param name="right">文字列</param>
     /// <returns>判定結果</returns>
     template <CChar TChar>
     [[nodiscard]] constexpr bool operator==(
@@ -176,8 +176,8 @@ namespace klib::Kongkong::Text
     /// 2つの文字列の値が等しくないかを判定
     /// </summary>
     /// <typeparam name="TChar">文字型</typeparam>
-    /// <param name="left">文字列ビュー</param>
-    /// <param name="right">文字列ビュー</param>
+    /// <param name="left">文字列</param>
+    /// <param name="right">文字列</param>
     /// <returns>判定結果</returns>
     template <CChar TChar>
     [[nodiscard]] constexpr bool operator!=(
@@ -189,8 +189,8 @@ namespace klib::Kongkong::Text
     /// 辞書順でleftがrightより手前かを判定
     /// </summary>
     /// <typeparam name="TChar">文字型</typeparam>
-    /// <param name="left">文字列ビュー</param>
-    /// <param name="right">文字列ビュー</param>
+    /// <param name="left">文字列</param>
+    /// <param name="right">文字列</param>
     /// <returns>判定結果</returns>
     template <CChar TChar>
     [[nodiscard]] constexpr bool operator<(
@@ -202,8 +202,8 @@ namespace klib::Kongkong::Text
     /// 辞書順でleftがrightより手前か等しいかを判定
     /// </summary>
     /// <typeparam name="TChar">文字型</typeparam>
-    /// <param name="left">文字列ビュー</param>
-    /// <param name="right">文字列ビュー</param>
+    /// <param name="left">文字列</param>
+    /// <param name="right">文字列</param>
     /// <returns>判定結果</returns>
     template <CChar TChar>
     [[nodiscard]] constexpr bool operator<=(
@@ -215,8 +215,8 @@ namespace klib::Kongkong::Text
     /// 辞書順でleftがrightより後かを判定
     /// </summary>
     /// <typeparam name="TChar">文字型</typeparam>
-    /// <param name="left">文字列ビュー</param>
-    /// <param name="right">文字列ビュー</param>
+    /// <param name="left">文字列</param>
+    /// <param name="right">文字列</param>
     /// <returns>判定結果</returns>
     template <CChar TChar>
     [[nodiscard]] constexpr bool operator>(
@@ -228,8 +228,8 @@ namespace klib::Kongkong::Text
     /// 辞書順でleftがrightより後か等しいかを判定
     /// </summary>
     /// <typeparam name="TChar">文字型</typeparam>
-    /// <param name="left">文字列ビュー</param>
-    /// <param name="right">文字列ビュー</param>
+    /// <param name="left">文字列</param>
+    /// <param name="right">文字列</param>
     /// <returns>判定結果</returns>
     template <CChar TChar>
     [[nodiscard]] constexpr bool operator>=(
@@ -241,8 +241,8 @@ namespace klib::Kongkong::Text
     /// 2つの文字列の順番を判定
     /// </summary>
     /// <typeparam name="TChar">文字型</typeparam>
-    /// <param name="left">文字列ビュー</param>
-    /// <param name="right">文字列ビュー</param>
+    /// <param name="left">文字列</param>
+    /// <param name="right">文字列</param>
     /// <returns>判定結果</returns>
     template <CChar TChar>
     [[nodiscard]] constexpr ::std::strong_ordering operator<=>(
@@ -257,7 +257,7 @@ namespace std
     /// 文字列をストリームに出力
     /// </summary>
     /// <param name="out">出力先</param>
-    /// <param name="view">出力する文字列ビュー</param>
+    /// <param name="view">出力する文字列</param>
     /// <returns>outの参照</returns>
     ostream& operator<<(ostream& out, ::klib::Kongkong::Text::FastCharStringBase const& view);
 }

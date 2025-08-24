@@ -293,6 +293,9 @@ namespace klib::Kongkong::Text
     struct GenericFastStringBase;
 
     template <CChar TChar, ssize_t N>
+    struct GenericStaticFastString;
+
+    template <CChar TChar, ssize_t N>
     struct GenericStaticMutableString;
 
     template <CChar TChar>
@@ -374,6 +377,24 @@ namespace klib::Kongkong::Text
     using StaticUtf8String = GenericStaticString<char8_t>;
     using StaticUtf16String = GenericStaticString<char16_t>;
     using StaticUtf32String = GenericStaticString<char32_t>;
+
+    template <ssize_t N = 0>
+    using StaticFastString = GenericStaticFastString<char16_t, N>;
+
+    template <ssize_t N>
+    using StaticFastCharString = GenericStaticFastString<char, N>;
+
+    template <ssize_t N>
+    using StaticFastWCharString = GenericStaticFastString<wchar_t, N>;
+
+    template <ssize_t N>
+    using StaticFastUtf8String = GenericStaticFastString<char8_t, N>;
+
+    template <ssize_t N>
+    using StaticFastUtf16String = GenericStaticFastString<char16_t, N>;
+
+    template <ssize_t N>
+    using StaticFastUtf32String = GenericStaticFastString<char32_t, N>;
 
     template <ssize_t N>
     using StaticMutableString = GenericStaticMutableString<char16_t, N>;
