@@ -229,6 +229,20 @@ namespace klib::Kongkong::Containers
     KLIB_INTERFACE IReadOnlyIterable;
 
     class ContainerHelper;
+
+    template <class T, ssize_t N>
+    struct BuiltInArrayList;
+
+    struct s_containerBase;
+
+    template <class T>
+    struct Span;
+
+    template <class T>
+    struct Span2;
+
+    template <class T>
+    struct Span3;
 }
 
 namespace klib::Kongkong::IO
@@ -332,6 +346,18 @@ namespace klib::Kongkong::Threading
 namespace klib::Kongkong
 {
     using String = Text::GenericString<char16_t>;
+}
+
+namespace klib::Kongkong::Containers
+{
+    template <class T>
+    using ReadOnlySpan = Span<T>;
+
+    template <class T>
+    using ReadOnlySpan2 = Span2<T>;
+
+    template <class T>
+    using ReadOnlySpan3 = Span3<T>;
 }
 
 namespace klib::Kongkong::Text
