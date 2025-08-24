@@ -126,6 +126,12 @@ namespace klib::Kongkong::Text
         ) const noexcept;
 
         /// <summary>
+        /// 文字列が空かを判定
+        /// </summary>
+        /// <returns>判定結果</returns>
+        [[nodiscard]] constexpr bool IsEmpty() const noexcept;
+
+        /// <summary>
         /// 文字列の長さを取得
         /// </summary>
         [[nodiscard]] constexpr ssize_t Length() const noexcept;
@@ -336,6 +342,12 @@ namespace klib::Kongkong::Text
             subString.m_length,
             subString.m_p
         );
+    }
+
+    template <CChar TChar>
+    constexpr bool GenericFastStringBase<TChar>::IsEmpty() const noexcept
+    {
+        return m_length != 0;
     }
 
     template <CChar TChar>

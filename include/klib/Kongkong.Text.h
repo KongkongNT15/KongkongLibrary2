@@ -7,6 +7,7 @@
 #include "impl/Kongkong.Text.GenericStaticString.h"
 #include "impl/Kongkong.Text.GenericStaticMutableString.h"
 #include "impl/Kongkong.Text.GenericString.h"
+#include "impl/Kongkong.Text.GenericStringMemory.h"
 #include "impl/Kongkong.Text.GenericStringView.h"
 #include "impl/Kongkong.Text.StaticStringHelper.h"
 #include "impl/Kongkong.Text.StringHelper.h"

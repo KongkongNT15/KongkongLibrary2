@@ -299,6 +299,9 @@ namespace klib::Kongkong::Text
     class GenericString;
 
     template <CChar TChar>
+    struct GenericStringMemory;
+
+    template <CChar TChar>
     class GenericFastMutableString;
 
     template <CChar TChar>
@@ -336,6 +339,13 @@ namespace klib::Kongkong::Text
     using Utf8String = GenericString<char8_t>;
     using Utf16String = GenericString<char16_t>;
     using Utf32String = GenericString<char32_t>;
+
+    using StringMemory = GenericStringMemory<char16_t>;
+    using CharStringMemory = GenericStringMemory<char>;
+    using WCharStringMemory = GenericStringMemory<wchar_t>;
+    using Utf8StringMemory = GenericStringMemory<char8_t>;
+    using Utf16StringMemory = GenericStringMemory<char16_t>;
+    using Utf32StringMemory = GenericStringMemory<char32_t>;
 
     using FastString = GenericFastString<char16_t>;
     using FastCharString = GenericFastString<char>;

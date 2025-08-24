@@ -8,7 +8,7 @@
 namespace klib::Kongkong::Text
 {
     /// <summary>
-    /// 
+    /// ヒープに確保される文字列
     /// </summary>
     /// <typeparam name="TChar">文字型</typeparam>
     template <CChar TChar>
@@ -30,6 +30,30 @@ namespace klib::Kongkong::Text
             NonType nonType
         );
     public:
+
+        /// <summary>
+        /// 文字列を連結
+        /// </summary>
+        /// <param name="left">連結する文字列</param>
+        /// <param name="right">連結する文字列</param>
+        /// <returns>連結された文字列</returns>
+        /// <exception cref="MemoryAllocationException">メモリを確保できなかった時</exception>
+        [[nodiscard]] static GenericFastString Concat(
+            GenericFastStringBase<TChar> const& left,
+            GenericFastStringBase<TChar> const& right
+        );
+
+        /// <summary>
+        /// 文字列リテラルから作成
+        /// </summary>
+        /// <typeparam name="N">文字配列の要素数</typeparam>
+        /// <param name="arr">文字列リテラル</param>
+        /// <returns>構築されたオブジェクト</returns>
+        /// <exception cref="MemoryAllocationException">メモリを確保できなかった時</exception>
+        template <ssize_t N>
+        [[nodiscard]] static GenericFastString FromLiteral(
+            const ElementType(&arr)[N]
+        );
 
         /// <summary>
         /// 文字列をコピー
@@ -70,6 +94,19 @@ namespace klib::Kongkong::Text
 
 namespace klib::Kongkong::Text
 {
+    template <CChar TChar>
+    template <ssize_t N>
+    [[nodiscard]] static GenericFastString<TChar> GenericFastString<TChar>::FromLiteral(
+        const ElementType(&arr)[N]
+    )
+    {
+        return GenericFastString(
+            N - 1,
+            &arr[0],
+            {}
+        );
+    }
+
     template <CChar TChar>
     GenericFastString<TChar>::GenericFastString(
         GenericFastString<TChar> const& right
