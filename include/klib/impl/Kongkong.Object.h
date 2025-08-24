@@ -179,6 +179,11 @@ namespace klib::Kongkong
         /// <returns>実態へのポインター</returns>
         [[nodiscard]] constexpr ImplType* GetPointer() const noexcept;
 
+        /// <summary>
+        /// nullチェック付きでインスタンスへのポインターを取得
+        /// </summary>
+        /// <typeparam name="TImpl">インスタンス型</typeparam>
+        /// <exception cref="NullPointerException">ポインターがNULLのとき</exception>
         template <class TImpl> requires ::std::derived_from<TImpl, ImplType>
         constexpr TImpl* GetPointerChecked() const;
 

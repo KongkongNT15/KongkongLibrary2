@@ -33,8 +33,8 @@ namespace klib::Kongkong::Text
             /// <param name="p">文字列へのポインター</param>
             constexpr ImplType(ssize_t length, const TChar* p) noexcept;
 
-            KLIB_NODISCARD constexpr const TChar* begin() const noexcept;
-            KLIB_NODISCARD constexpr const TChar* end() const noexcept;
+            [[nodiscard]] constexpr const TChar* begin() const noexcept;
+            [[nodiscard]] constexpr const TChar* end() const noexcept;
 
         public:
 
@@ -42,7 +42,7 @@ namespace klib::Kongkong::Text
             /// Cスタイル文字列に変換
             /// </summary>
             /// <returns>文字列へのポインター</returns>
-            KLIB_NODISCARD constexpr const TChar* c_str() const noexcept;
+            [[nodiscard]] constexpr const TChar* c_str() const noexcept;
 
             /// <summary>
             /// 指定したインデックスの文字を取得
@@ -50,19 +50,19 @@ namespace klib::Kongkong::Text
             /// <param name="index">インデックス</param>
             /// <returns>指定したインデックスの文字</returns>
             /// <exception cref="ArgumentOutOfRangeException">indexが範囲外の時</exception>
-            KLIB_NODISCARD constexpr TChar const& At(ssize_t index) const;
+            [[nodiscard]] constexpr TChar const& At(ssize_t index) const;
 
             /// <summary>
             /// 文字列データを取得
             /// </summary>
             /// <returns>データへのポインター</returns>
-            KLIB_NODISCARD constexpr const TChar* Data() const noexcept;
+            [[nodiscard]] constexpr const TChar* Data() const noexcept;
 
             /// <summary>
             /// 文字列の長さを取得
             /// </summary>
             /// <returns>文字列の長さ</returns>
-            KLIB_NODISCARD constexpr ssize_t Length() const noexcept;
+            [[nodiscard]] constexpr ssize_t Length() const noexcept;
         };
 
     public:
@@ -71,10 +71,10 @@ namespace klib::Kongkong::Text
         GenericString(const TChar* cStr);
         GenericString(ssize_t length, const TChar* cStr);
 
-        KLIB_NODISCARD const TChar& operator[](ssize_t index) const;
+        [[nodiscard]] const TChar& operator[](ssize_t index) const;
 
-        KLIB_NODISCARD const TChar* begin() const;
-        KLIB_NODISCARD const TChar* end() const;
+        [[nodiscard]] const TChar* begin() const;
+        [[nodiscard]] const TChar* end() const;
     };
 }
 

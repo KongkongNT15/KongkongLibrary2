@@ -542,7 +542,7 @@ namespace klib::Kongkong::Text
 {
     consteval ssize_t StringHelper::NotFound() noexcept
     {
-        Containers::ContainerHelper::NotFound();
+        return Containers::ContainerHelper::NotFound();
     }
 
     template <CChar TChar>

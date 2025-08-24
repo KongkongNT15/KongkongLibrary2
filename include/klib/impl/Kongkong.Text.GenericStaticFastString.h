@@ -74,6 +74,11 @@ namespace klib::Kongkong::Text
         [[nodiscard]] constexpr const ElementType* end() const noexcept;
 
         /// <summary>
+        /// Cスタイル文字列を取得
+        /// </summary>
+        [[nodiscard]] constexpr const ElementType* c_str() const noexcept;
+
+        /// <summary>
         /// 文字列に指定の文字が含まれるかを判定
         /// </summary>
         /// <param name="c">指定する文字</param>
@@ -165,6 +170,11 @@ namespace klib::Kongkong::Text
 
 		KLIB_STATIC_CLASS(GenericStaticFastString);
 
+        /// <summary>
+        /// IndexOf()で要素が見つからなかったときの戻り値
+        /// </summary>
+        [[nodiscard]] static consteval ssize_t NotFound() noexcept;
+
 		template <CChar TChar, ssize_t N>
 		[[nodiscard]] static consteval GenericStaticFastString<TChar, N> FromLiteral(
 			const TChar(&arr)[N]
@@ -242,6 +252,12 @@ namespace klib::Kongkong::Text
     constexpr const GenericStaticFastString<TChar, N>::ElementType* GenericStaticFastString<TChar, N>::end() const noexcept
     {
         return m_arr + (N - 1);
+    }
+
+    template <CChar TChar, ssize_t N>
+    constexpr const GenericStaticFastString<TChar, N>::ElementType* GenericStaticFastString<TChar, N>::c_str() const noexcept
+    {
+        return m_arr;
     }
 
     template <CChar TChar, ssize_t N>
@@ -340,6 +356,11 @@ namespace klib::Kongkong::Text
         );
     }
 
+    consteval ssize_t GenericStaticFastString<char16_t, 0>::NotFound() noexcept
+    {
+        return StringHelper::NotFound();
+    }
+
     template <CChar TChar, ssize_t N>
     consteval GenericStaticFastString<TChar, N> GenericStaticFastString<char16_t, 0>::FromLiteral(
         const TChar(&arr)[N]
@@ -347,14 +368,6 @@ namespace klib::Kongkong::Text
     {
         return GenericStaticFastString<TChar, N>(arr);
     }
-}
-
-int main()
-{
-	using namespace klib::Kongkong::Text;
-
-    auto str = StaticFastString<>::FromLiteral("");
-    auto view = str.GetView();
 }
 
 #endif //!KLIB_KONGKONG_TEXT_GENERICSTATICFASTSTRING_H
