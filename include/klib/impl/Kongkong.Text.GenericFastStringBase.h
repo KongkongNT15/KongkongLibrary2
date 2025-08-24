@@ -53,6 +53,11 @@ namespace klib::Kongkong::Text
 		GenericFastStringBase& operator=(GenericFastStringBase&&) = default;
 
 	public:
+		/// <summary>
+		/// IndexOf()で要素が見つからなかったときの戻り値
+		/// </summary>
+		[[nodiscard]] static consteval ssize_t NotFound() noexcept;
+
 		[[nodiscard]] constexpr const ElementType* begin() const noexcept;
 		[[nodiscard]] constexpr const ElementType* end() const noexcept;
 
@@ -80,9 +85,54 @@ namespace klib::Kongkong::Text
 		[[nodiscard]] constexpr const ElementType* Data() const noexcept;
 
 		/// <summary>
+		/// 文字列が指定した文字で終了するかを判定
+		/// </summary>
+		/// <param name="c">指定する文字</param>
+		/// <returns>判定結果</returns>
+		[[nodiscard]] constexpr bool EndsWith(
+			ElementType c
+		) const noexcept;
+
+		/// <summary>
+		/// 文字列が指定した部分文字列で終了するかを判定
+		/// </summary>
+		/// <param name="subString">部分文字列</param>
+		/// <returns>判定結果</returns>
+		[[nodiscard]] constexpr bool EndsWith(
+			GenericFastStringBase const & subString
+		) const noexcept;
+
+		/// <summary>
+		/// 文字列中の指定の文字の要素番号を取得
+		/// </summary>
+		/// <param name="c">指定する文字</param>
+		/// <returns>指定した文字がある要素番号 見つからない場合はNotFound()</returns>
+		[[nodiscard]] constexpr ssize_t IndexOf(
+			ElementType c
+		) const noexcept;
+
+		/// <summary>
 		/// 文字列の長さを取得
 		/// </summary>
 		[[nodiscard]] constexpr ssize_t Length() const noexcept;
+
+		/// <summary>
+		/// 文字列が指定した文字で始まるかを判定
+		/// </summary>
+		/// <param name="c">指定する文字</param>
+		/// <returns>判定結果</returns>
+		[[nodiscard]] constexpr bool StartsWith(
+			ElementType c
+		) const noexcept;
+
+		/// <summary>
+		/// 文字列が指定した部分文字列で始まるかを判定
+		/// </summary>
+		/// <param name="subString">部分文字列</param>
+		/// <returns>判定結果</returns>
+		[[nodiscard]] constexpr bool StartsWith(
+			GenericFastStringBase const& subString
+		) const noexcept;
 
 		[[nodiscard]] String ToString() const;
 	};
@@ -195,6 +245,12 @@ namespace std
 namespace klib::Kongkong::Text
 {
 	template <CChar TChar>
+	consteval ssize_t GenericFastStringBase<TChar>::NotFound() noexcept
+	{
+		return StringHelper::NotFound();
+	}
+
+	template <CChar TChar>
 	constexpr const GenericFastStringBase<TChar>::ElementType* GenericFastStringBase<TChar>::begin() const noexcept
 	{
 		return m_p;
@@ -238,9 +294,59 @@ namespace klib::Kongkong::Text
 	}
 
 	template <CChar TChar>
+	constexpr bool GenericFastStringBase<TChar>::EndsWith(
+		ElementType c
+	) const noexcept
+	{
+		return StringHelper::EndsWithUnsafe(
+			m_length,
+			m_p,
+			c
+		);
+	}
+
+	template <CChar TChar>
+	constexpr bool GenericFastStringBase<TChar>::EndsWith(
+		GenericFastStringBase<TChar> const& subString
+	) const noexcept
+	{
+		return StringHelper::EndsWithUnsafe(
+			m_length,
+			m_p,
+			subString.m_length,
+			subString.m_p
+		);
+	}
+
+	template <CChar TChar>
 	constexpr ssize_t GenericFastStringBase<TChar>::Length() const noexcept
 	{
 		return m_length;
+	}
+
+	template <CChar TChar>
+	constexpr bool GenericFastStringBase<TChar>::StartsWith(
+		ElementType c
+	) const noexcept
+	{
+		return StringHelper::StartsWithUnsafe(
+			m_length,
+			m_p,
+			c
+		);
+	}
+
+	template <CChar TChar>
+	constexpr bool GenericFastStringBase<TChar>::StartsWith(
+		GenericFastStringBase<TChar> const& subString
+	) const noexcept
+	{
+		return StringHelper::StartsWithUnsafe(
+			m_length,
+			m_p,
+			subString.m_length,
+			subString.m_p
+		);
 	}
 
 	template <CChar TChar>
