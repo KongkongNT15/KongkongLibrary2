@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <concepts>
 #include <compare>
+#include <new>
 #include <type_traits>
 
 #if __has_include(<Windows.h>)
@@ -164,6 +165,8 @@
 
 #define KLIB_INTERFACE struct
 
+#define KLIB_NEW new(::std::nothrow)
+
 // msvcではssize_tは定義されないので追加
 #if KLIB_COMPILER_MSVC
     #ifdef _WIN64
@@ -184,7 +187,6 @@
 /// </summary>
 namespace klib
 {
-
 }
 
 /// <summary>
@@ -285,6 +287,9 @@ namespace klib::Kongkong::Text
         ::std::same_as<T, char32_t>;
 
     template <CChar TChar>
+    struct GenericFastString;
+
+    template <CChar TChar>
     struct GenericFastStringBase;
 
     template <CChar TChar, ssize_t N>
@@ -331,6 +336,13 @@ namespace klib::Kongkong::Text
     using Utf8String = GenericString<char8_t>;
     using Utf16String = GenericString<char16_t>;
     using Utf32String = GenericString<char32_t>;
+
+    using FastString = GenericFastString<char16_t>;
+    using FastCharString = GenericFastString<char>;
+    using FastWCharString = GenericFastString<wchar_t>;
+    using FastUtf8String = GenericFastString<char8_t>;
+    using FastUtf16String = GenericFastString<char16_t>;
+    using FastUtf32String = GenericFastString<char32_t>;
 
     using FastStringBase = GenericFastStringBase<char16_t>;
     using FastCharStringBase = GenericFastStringBase<char>;

@@ -16,6 +16,10 @@ namespace klib::Kongkong
 		Text::StaticString s_outOfMemoryMessage;
 		
 	public:
+		/// <summary>
+		/// メモリ不足
+		/// </summary>
+		/// <returns></returns>
 		[[nodiscard]] static MemoryAllocationException OutOfMemory() noexcept;
 
 		using Exception::Exception;

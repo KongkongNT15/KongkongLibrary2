@@ -6,6 +6,7 @@
 #include "impl/Kongkong.InvalidCastException.cpp"
 #include "impl/Kongkong.Object.cpp"
 
+#include "impl/Kongkong.Text.GenericFastString.cpp"
 #include "impl/Kongkong.Text.GenericFastStringBase.cpp"
 #include "impl/Kongkong.Text.GenericHeapString.cpp"
 #include "impl/Kongkong.Text.GenericStaticString.cpp"
