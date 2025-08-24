@@ -1,3 +1,7 @@
 ﻿#VisualStudio
 .vs
 *.user
+x64
+win32
+debug
+release
