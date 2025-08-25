@@ -202,6 +202,7 @@ namespace klib::Kongkong
     struct ArgumentException;
     struct ArgumentOutOfRangeException;
     struct Exception;
+    class HandleType;
     struct InvalidCastException;
     struct MemoryAllocationException;
     struct NonType;

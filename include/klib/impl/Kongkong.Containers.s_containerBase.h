@@ -2,6 +2,7 @@
 #define KLIB_KONGKONG_CONTAINTERS_CONTAINERBASE_H
 
 #include "base.h"
+#include "Kongkong.Containers.ContainerHelper.h"
 
 namespace klib::Kongkong::Containers
 {
@@ -18,6 +19,12 @@ namespace klib::Kongkong::Containers
             ssize_t length
         ) noexcept;
     public:
+
+        /// <summary>
+        /// IndexOf()で見つからなかったときの戻り値
+        /// </summary>
+        /// <returns></returns>
+        [[nodiscard]] static consteval ssize_t NotFound() noexcept;
 
         /// <summary>
         /// コンテナが空かを判定
@@ -44,6 +51,11 @@ namespace klib::Kongkong::Containers
     ) noexcept
         : m_length(length)
     {
+    }
+
+    consteval ssize_t s_containerBase::NotFound() noexcept
+    {
+        return ContainerHelper::NotFound();
     }
 
     constexpr bool s_containerBase::IsEmpty() const noexcept

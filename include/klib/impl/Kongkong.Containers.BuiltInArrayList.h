@@ -95,6 +95,15 @@ namespace klib::Kongkong::Containers
         constexpr void Clear() noexcept;
 
         /// <summary>
+        /// 指定した値が配列に含まれるかを判定
+        /// </summary>
+        /// <param name="value">指定する値</param>
+        /// <returns>判定結果</returns>
+        [[nodiscard]] constexpr bool Contains(
+            ElementType const& value
+        ) const noexcept;
+
+        /// <summary>
         /// 配列へのポインターを取得
         /// </summary>
         [[nodiscard]] constexpr ElementType* Data() noexcept;
@@ -115,8 +124,32 @@ namespace klib::Kongkong::Containers
             Args&&... args
         ) noexcept(noexcept(ElementType(::std::forward<Args>(args)...)));
 
-        
+        /// <summary>
+        /// 配列の最後の要素が指定した値と一致するかを判定
+        /// </summary>
+        /// <param name="value">指定する値</param>
+        /// <returns>判定結果</returns>
+        [[nodiscard]] constexpr bool EndsWith(
+            ElementType const& value
+        ) const noexcept;
 
+        /// <summary>
+        /// 指定した要素の要素番号を取得
+        /// </summary>
+        /// <param name="value">要素</param>
+        /// <returns>指定した要素がある要素番号 見つからない場合はNotFound()</returns>
+        [[nodiscard]] constexpr ssize_t IndexOf(
+            ElementType const& value
+        ) const noexcept;
+
+        /// <summary>
+        /// 配列の初めの要素が指定した値と一致するかを判定
+        /// </summary>
+        /// <param name="value">指定する値</param>
+        /// <returns>判定結果</returns>
+        [[nodiscard]] constexpr bool StartsWith(
+            ElementType const& value
+        ) const noexcept;
 
     };
 }
@@ -209,6 +242,18 @@ namespace klib::Kongkong::Containers
     }
 
     template <class T, ssize_t N>
+    constexpr bool BuiltInArrayList<T, N>::Contains(
+        ElementType const& value
+    ) const noexcept
+    {
+        return ContainerHelper::ContainsUnsafe(
+            this->m_length,
+            Data(),
+            value
+        );
+    }
+
+    template <class T, ssize_t N>
     constexpr BuiltInArrayList<T, N>::ElementType* BuiltInArrayList<T, N>::Data() noexcept
     {
         return reinterpret_cast<ElementType*>(m_arr);
@@ -236,6 +281,30 @@ namespace klib::Kongkong::Containers
         ++this->m_length;
 
         return true;
+    }
+
+    template <class T, ssize_t N>
+    constexpr bool BuiltInArrayList<T, N>::EndsWith(
+        ElementType const& value
+    ) const noexcept
+    {
+        return ContainerHelper::EndsWithUnsafe(
+            this->m_length,
+            Data(),
+            value
+        );
+    }
+
+    template <class T, ssize_t N>
+    constexpr bool BuiltInArrayList<T, N>::StartsWith(
+        ElementType const& value
+    ) const noexcept
+    {
+        return ContainerHelper::StartsWithUnsafe(
+            this->m_length,
+            Data(),
+            value
+        );
     }
 }
 

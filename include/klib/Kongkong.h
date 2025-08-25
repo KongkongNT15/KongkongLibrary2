@@ -5,6 +5,7 @@
 #include "impl/Kongkong.ArgumentOutOfRangeException.h"
 #include "impl/Kongkong.Exception.h"
 #include "impl/Kongkong.GC.h"
+#include "impl/Kongkong.HandleType.h"
 #include "impl/Kongkong.Interface.h"
 #include "impl/Kongkong.InvalidCastException.h"
 #include "impl/Kongkong.MemoryAllocationException.h"

@@ -103,6 +103,16 @@ namespace klib::Kongkong::Containers
         ) = delete;
 
         /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <class T>
+        static bool StartsWithUnsafe(
+            ssize_t,
+            ::std::nullptr_t,
+            T const&
+        ) = delete;
+
+        /// <summary>
         /// 指定した要素が配列の最初の要素と一致するかを判定
         /// </summary>
         /// <typeparam name="T">要素型</typeparam>
@@ -111,6 +121,21 @@ namespace klib::Kongkong::Containers
         /// <returns>判定結果</returns>
         template <class T>
         [[nodiscard]] constexpr bool StartsWithUnsafe(
+            const T* p,
+            T const& value
+        ) noexcept;
+
+        /// <summary>
+        /// 指定した要素が配列の最初の要素と一致するかを判定
+        /// </summary>
+        /// <typeparam name="T">要素型</typeparam>
+        /// <param name="length">配列の長さ</param>
+        /// <param name="p">配列へのポインター</param>
+        /// <param name="value">要素</param>
+        /// <returns>判定結果</returns>
+        template <class T>
+        [[nodiscard]] constexpr bool StartsWithUnsafe(
+            ssize_t length,
             const T* p,
             T const& value
         ) noexcept;
@@ -176,6 +201,16 @@ namespace klib::Kongkong::Containers
     ) noexcept
     {
         return *p == value;
+    }
+
+    template <class T>
+    constexpr bool ContainerHelper::StartsWithUnsafe(
+        ssize_t length,
+        const T* p,
+        T const& value
+    ) noexcept
+    {
+        return length != 0 && *p == value;
     }
 }
 
