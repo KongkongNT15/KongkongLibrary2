@@ -69,7 +69,9 @@ namespace klib::Kongkong::Containers
         /// 末尾に要素をデフォルト構築
         /// </summary>
         /// <returns>要素を追加できたかどうか</returns>
-        bool Append() noexcept(::std::is_nothrow_constructible_v<ElementType>) requires ::std::default_initializable<ElementType>;
+        bool Append()
+        noexcept(::std::is_nothrow_constructible_v<ElementType>)
+        requires ::std::default_initializable<ElementType>;
 
         /// <summary>
         /// 末尾に要素をコピー構築
@@ -78,7 +80,9 @@ namespace klib::Kongkong::Containers
         /// <returns>要素を追加できたかどうか</returns>
         bool Append(
             ElementType const& value
-        ) noexcept(::std::is_nothrow_copy_constructible_v<ElementType>) requires ::std::copy_constructible<ElementType>;
+        )
+        noexcept(::std::is_nothrow_copy_constructible_v<ElementType>)
+        requires ::std::copy_constructible<ElementType>;
 
         /// <summary>
         /// 末尾に要素をムーブ構築
@@ -87,7 +91,9 @@ namespace klib::Kongkong::Containers
         /// <returns>要素を追加できたかどうか</returns>
         bool Append(
             ElementType&& value
-        ) noexcept(::std::is_nothrow_move_constructible_v<ElementType>) requires ::std::move_constructible<ElementType>;
+        )
+        noexcept(::std::is_nothrow_move_constructible_v<ElementType>)
+        requires ::std::move_constructible<ElementType>;
 
         /// <summary>
         /// 要素をすべて破棄
@@ -171,7 +177,8 @@ namespace klib::Kongkong::Containers
     }
 
     template <class T, ssize_t N>
-    constexpr BuiltInArrayList<T, N>::ElementType& BuiltInArrayList<T, N>::operator[](
+    constexpr typename BuiltInArrayList<T, N>::ElementType&
+    BuiltInArrayList<T, N>::operator[](
         ssize_t index
     ) noexcept
     {
@@ -179,7 +186,8 @@ namespace klib::Kongkong::Containers
     }
 
     template <class T, ssize_t N>
-    constexpr BuiltInArrayList<T, N>::ElementType const& BuiltInArrayList<T, N>::operator[](
+    constexpr typename BuiltInArrayList<T, N>::ElementType const&
+    BuiltInArrayList<T, N>::operator[](
         ssize_t index
     ) const noexcept
     {
@@ -187,31 +195,37 @@ namespace klib::Kongkong::Containers
     }
 
     template <class T, ssize_t N>
-    constexpr BuiltInArrayList<T, N>::ElementType* BuiltInArrayList<T, N>::begin() noexcept
+    constexpr typename BuiltInArrayList<T, N>::ElementType*
+    BuiltInArrayList<T, N>::begin() noexcept
     {
         return Data();
     }
 
     template <class T, ssize_t N>
-    constexpr const BuiltInArrayList<T, N>::ElementType* BuiltInArrayList<T, N>::begin() const noexcept
+    constexpr const typename BuiltInArrayList<T, N>::ElementType*
+    BuiltInArrayList<T, N>::begin() const noexcept
     {
         return Data();
     }
 
     template <class T, ssize_t N>
-    constexpr BuiltInArrayList<T, N>::ElementType* BuiltInArrayList<T, N>::end() noexcept
+    constexpr typename BuiltInArrayList<T, N>::ElementType*
+    BuiltInArrayList<T, N>::end() noexcept
     {
         return Data() + this->m_length;
     }
 
     template <class T, ssize_t N>
-    constexpr const BuiltInArrayList<T, N>::ElementType* BuiltInArrayList<T, N>::end() const noexcept
+    constexpr const typename BuiltInArrayList<T, N>::ElementType*
+    BuiltInArrayList<T, N>::end() const noexcept
     {
         return Data() + this->m_length;
     }
 
     template <class T, ssize_t N>
-    bool BuiltInArrayList<T, N>::Append() noexcept(::std::is_nothrow_constructible_v<ElementType>) requires ::std::default_initializable<ElementType>
+    bool BuiltInArrayList<T, N>::Append()
+    noexcept(::std::is_nothrow_constructible_v<ElementType>)
+    requires ::std::default_initializable<ElementType>
     {
         return Emplace();
     }
@@ -219,7 +233,9 @@ namespace klib::Kongkong::Containers
     template <class T, ssize_t N>
     bool BuiltInArrayList<T, N>::Append(
         ElementType const& value
-    ) noexcept(::std::is_nothrow_copy_constructible_v<ElementType>) requires ::std::copy_constructible<ElementType>
+    )
+    noexcept(::std::is_nothrow_copy_constructible_v<ElementType>)
+    requires ::std::copy_constructible<ElementType>
     {
         return Emplace(value);
     }
@@ -227,7 +243,9 @@ namespace klib::Kongkong::Containers
     template <class T, ssize_t N>
     bool BuiltInArrayList<T, N>::Append(
         ElementType&& value
-    ) noexcept(::std::is_nothrow_move_constructible_v<ElementType>) requires ::std::move_constructible<ElementType>
+    )
+    noexcept(::std::is_nothrow_move_constructible_v<ElementType>)
+    requires ::std::move_constructible<ElementType>
     {
         return Emplace(::std::move(value));
     }
@@ -254,13 +272,15 @@ namespace klib::Kongkong::Containers
     }
 
     template <class T, ssize_t N>
-    constexpr BuiltInArrayList<T, N>::ElementType* BuiltInArrayList<T, N>::Data() noexcept
+    constexpr typename BuiltInArrayList<T, N>::ElementType*
+    BuiltInArrayList<T, N>::Data() noexcept
     {
         return reinterpret_cast<ElementType*>(m_arr);
     }
 
     template <class T, ssize_t N>
-    constexpr const BuiltInArrayList<T, N>::ElementType* BuiltInArrayList<T, N>::Data() const noexcept
+    constexpr const typename BuiltInArrayList<T, N>::ElementType*
+    BuiltInArrayList<T, N>::Data() const noexcept
     {
         return reinterpret_cast<const ElementType*>(m_arr);
     }
