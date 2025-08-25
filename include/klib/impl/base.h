@@ -231,7 +231,13 @@ namespace klib::Kongkong::Containers
     class ContainerHelper;
 
     template <class T, ssize_t N>
+    struct BuiltInArray;
+
+    template <class T, ssize_t N>
     struct BuiltInArrayList;
+
+    template <class T>
+    struct s_arrayBase;
 
     struct s_containerBase;
 

@@ -42,6 +42,24 @@ namespace klib::Kongkong::Containers
         /// </summary>
         constexpr ~BuiltInArrayList();
 
+        /// <summary>
+        /// 要素を取得
+        /// </summary>
+        /// <param name="index">要素番号</param>
+        /// <returns>要素の参照</returns>
+        [[nodiscard]] constexpr ElementType& operator[](
+            ssize_t index
+        ) noexcept;
+
+        /// <summary>
+        /// 要素を取得
+        /// </summary>
+        /// <param name="index">要素番号</param>
+        /// <returns>要素の参照</returns>
+        [[nodiscard]] constexpr ElementType const& operator[](
+            ssize_t index
+        ) const noexcept;
+
         [[nodiscard]] constexpr ElementType* begin() noexcept;
         [[nodiscard]] constexpr const ElementType* begin() const noexcept;
         [[nodiscard]] constexpr ElementType* end() noexcept;
@@ -117,6 +135,22 @@ namespace klib::Kongkong::Containers
         for (ElementType& element : *this) {
             element.~ElementType();
         }
+    }
+
+    template <class T, ssize_t N>
+    constexpr BuiltInArrayList<T, N>::ElementType& BuiltInArrayList<T, N>::operator[](
+        ssize_t index
+    ) noexcept
+    {
+        return Arr[index];
+    }
+
+    template <class T, ssize_t N>
+    constexpr BuiltInArrayList<T, N>::ElementType const& BuiltInArrayList<T, N>::operator[](
+        ssize_t index
+    ) const noexcept
+    {
+        return Arr[index];
     }
 
     template <class T, ssize_t N>
