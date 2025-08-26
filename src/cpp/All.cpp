@@ -12,3 +12,9 @@
 #include "impl/Kongkong.Text.GenericStaticString.cpp"
 #include "impl/Kongkong.Text.GenericString.cpp"
 #include "impl/Kongkong.Text.GenericStringMemory.cpp"
+
+#include "impl/Kongkong.Threading.Mutex.cpp"
+
+#if KLIB_ENV_WINDOWS
+#include "impl/Kongkong.Win32.Handle.cpp"
+#endif

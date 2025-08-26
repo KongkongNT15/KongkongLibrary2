@@ -219,43 +219,50 @@ namespace klib::Kongkong::Text
     }
 
     template <CChar TChar, ssize_t N>
-    constexpr GenericStaticFastString<TChar, N>::ElementType& GenericStaticFastString<TChar, N>::operator[](ssize_t index) noexcept
+    constexpr GenericStaticFastString<TChar, N>::ElementType&
+    GenericStaticFastString<TChar, N>::operator[](ssize_t index) noexcept
     {
         return m_arr[index];
     }
 
     template <CChar TChar, ssize_t N>
-    constexpr GenericStaticFastString<TChar, N>::ElementType const& GenericStaticFastString<TChar, N>::operator[](ssize_t index) const noexcept
+    constexpr GenericStaticFastString<TChar, N>::ElementType const&
+    GenericStaticFastString<TChar, N>::operator[](ssize_t index) const noexcept
     {
         return m_arr[index];
     }
 
     template <CChar TChar, ssize_t N>
-    constexpr GenericStaticFastString<TChar, N>::ElementType* GenericStaticFastString<TChar, N>::begin() noexcept
+    constexpr GenericStaticFastString<TChar, N>::ElementType*
+    GenericStaticFastString<TChar, N>::begin() noexcept
     {
         return m_arr;
     }
 
     template <CChar TChar, ssize_t N>
-    constexpr const GenericStaticFastString<TChar, N>::ElementType* GenericStaticFastString<TChar, N>::begin() const noexcept
+    constexpr const GenericStaticFastString<TChar, N>::ElementType*
+    GenericStaticFastString<TChar, N>::begin() const noexcept
     {
         return m_arr;
     }
 
     template <CChar TChar, ssize_t N>
-    constexpr GenericStaticFastString<TChar, N>::ElementType* GenericStaticFastString<TChar, N>::end() noexcept
+    constexpr GenericStaticFastString<TChar, N>::ElementType*
+    GenericStaticFastString<TChar, N>::end() noexcept
     {
         return m_arr + (N - 1);
     }
 
     template <CChar TChar, ssize_t N>
-    constexpr const GenericStaticFastString<TChar, N>::ElementType* GenericStaticFastString<TChar, N>::end() const noexcept
+    constexpr const GenericStaticFastString<TChar, N>::ElementType*
+    GenericStaticFastString<TChar, N>::end() const noexcept
     {
         return m_arr + (N - 1);
     }
 
     template <CChar TChar, ssize_t N>
-    constexpr const GenericStaticFastString<TChar, N>::ElementType* GenericStaticFastString<TChar, N>::c_str() const noexcept
+    constexpr const GenericStaticFastString<TChar, N>::ElementType*
+    GenericStaticFastString<TChar, N>::c_str() const noexcept
     {
         return m_arr;
     }

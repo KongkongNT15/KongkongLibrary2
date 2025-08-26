@@ -9,6 +9,7 @@
 
 #if __has_include(<Windows.h>)
     #define KLIB_ENV_WINDOWS 1
+    #include <Windows.h>
 
     #if __cplusplus == 199711L
         #define KLIB_COMPILER_MSVC 1
@@ -36,6 +37,8 @@
 
 #if __has_include(<unistd.h>) && !defined(KLIB_ENV_WINDOWS)
     #define KLIB_ENV_UNIX 1
+
+    #include <unistd.h>
 #endif
 
 #ifdef __APPLE__
@@ -130,6 +133,12 @@
 
 #ifndef KLIB_ENV_X64
     #define KLIB_ENV_X64 0
+#endif
+
+#if KLIB_ENV_UNIX || KLIB_ENV_WINDOWS
+    #define KLIB_ENV_OTHER 0
+#else
+    #define KLIB_ENV_OTHER 1
 #endif
 
 #if KLIB_HAS_CPP20
@@ -346,7 +355,15 @@ namespace klib::Kongkong::Text
 
 namespace klib::Kongkong::Threading
 {
+    class Mutex;
+}
 
+/// <summary>
+/// Win32APIのラッパー
+/// </summary>
+namespace klib::Kongkong::Win32
+{
+    class Handle;
 }
 
 // エイリアス

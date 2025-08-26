@@ -11,5 +11,7 @@
 #include <klib/Kongkong.Containers.h>
 #include <klib/Kongkong.Numerics.h>
 #include <klib/Kongkong.Text.h>
+#include <klib/Kongkong.Threading.h>
+#include <klib/Kongkong.Win32.h>
 
 #endif //!ALL_H
