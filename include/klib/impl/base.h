@@ -364,6 +364,7 @@ namespace klib::Kongkong::Threading
 namespace klib::Kongkong::Win32
 {
     class Handle;
+    class WinError;
 }
 
 // エイリアス

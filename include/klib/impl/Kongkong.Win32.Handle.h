@@ -37,9 +37,24 @@ namespace klib::Kongkong::Win32
             bool Close() noexcept;
         };
 
+        /// <summary>
+        /// ハンドルインスタンス
+        /// メンバーにすることで派生クラスを作ってもoperator=()がオーバーロードされないようにする
+        /// </summary>
         s_handle m_handle;
         
     public:
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [[nodiscard]] constexpr bool operator!() const noexcept;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [[nodiscard]] constexpr operator bool() const noexcept;
 
         /// <summary>
         /// Win32の生ハンドルを取得
@@ -66,6 +81,26 @@ namespace klib::Kongkong::Win32
         ::std::nullptr_t,
         Handle const& right
     ) noexcept;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="left"></param>
+    /// <returns></returns>
+    [[nodiscard]] constexpr bool operator!=(
+        Handle const& left,
+        ::std::nullptr_t
+        ) noexcept;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="right"></param>
+    /// <returns></returns>
+    [[nodiscard]] constexpr bool operator!=(
+        ::std::nullptr_t,
+        Handle const& right
+        ) noexcept;
 }
 
 namespace klib::Kongkong::Win32
@@ -88,6 +123,16 @@ namespace klib::Kongkong::Win32
         m_handle = InvalidValue();
     }
 
+    constexpr bool Handle::operator!() const noexcept
+    {
+        return m_handle.m_handle == Handle::s_handle::InvalidValue();
+    }
+
+    constexpr Handle::operator bool() const noexcept
+    {
+        return m_handle.m_handle != Handle::s_handle::InvalidValue();
+    }
+
     constexpr ::HANDLE Handle::RawHandle() const noexcept
     {
         return m_handle.m_handle;
@@ -107,6 +152,22 @@ namespace klib::Kongkong::Win32
     ) noexcept
     {
         return right == nullptr;
+    }
+
+    constexpr bool operator!=(
+        Handle const& left,
+        ::std::nullptr_t
+        ) noexcept
+    {
+        return !(left == nullptr);
+    }
+
+    constexpr bool operator!=(
+        ::std::nullptr_t,
+        Handle const& right
+        ) noexcept
+    {
+        return !(right == nullptr);
     }
 }
 
