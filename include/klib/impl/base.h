@@ -301,6 +301,12 @@ namespace klib::Kongkong::Numerics
         ::std::same_as<T, bool> == false;
 
     class Math;
+
+    template <class T = void>
+    struct Number;
+
+    template <class T>
+    struct NumberParseResult;
 }
 
 /// <summary>
