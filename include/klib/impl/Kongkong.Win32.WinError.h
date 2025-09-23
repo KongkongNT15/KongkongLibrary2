@@ -17,7 +17,7 @@ namespace klib::Kongkong::Win32
         /// エラーコードから例外をスロー
         /// </summary>
         /// <param name="errorCode">エラーコード</param>
-        static void Throw(
+        [[noreturn]] static void Throw(
             ::DWORD errorCode
         );
 
@@ -25,7 +25,7 @@ namespace klib::Kongkong::Win32
         /// エラーコードから例外をスロー
         /// </summary>
         /// <param name="errorCode">エラーコード</param>
-        static void Throw(
+        [[noreturn]] static void Throw(
             ::HRESULT errorCode
         );
 

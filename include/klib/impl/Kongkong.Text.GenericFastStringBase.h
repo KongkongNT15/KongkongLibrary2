@@ -15,7 +15,7 @@ namespace klib::Kongkong::Text
         /// <summary>
         /// 要素型
         /// </summary>
-        using ElementType = TChar;
+        using ElementType = typename TChar;
 
     protected:
         /// <summary>
@@ -69,6 +69,16 @@ namespace klib::Kongkong::Text
 
         [[nodiscard]] constexpr const ElementType* begin() const noexcept;
         [[nodiscard]] constexpr const ElementType* end() const noexcept;
+
+        /// <summary>
+        /// 指定したインデックスの文字を取得
+        /// </summary>
+        /// <param name="index">インデックス</param>
+        /// <returns>指定したインデックスの文字</returns>
+        /// <exception cref="ArgumentOutOfRangeException">indexが範囲外の時</exception>
+        [[nodiscard]] constexpr ElementType const& At(
+            ssize_t index
+        ) const;
 
         /// <summary>
         /// 文字列に指定の文字が含まれるかを判定
@@ -259,7 +269,10 @@ namespace std
     /// <param name="out">出力先</param>
     /// <param name="view">出力する文字列</param>
     /// <returns>outの参照</returns>
-    ostream& operator<<(ostream& out, ::klib::Kongkong::Text::FastCharStringBase const& view);
+    ostream& operator<<(
+        ostream& out,
+        ::klib::Kongkong::Text::FastCharStringBase const& view
+    );
 }
 
 namespace klib::Kongkong::Text
@@ -271,19 +284,22 @@ namespace klib::Kongkong::Text
     }
 
     template <CChar TChar>
-    constexpr GenericFastStringBase<TChar>::ElementType const& GenericFastStringBase<TChar>::operator[](ssize_t index) const noexcept
+    constexpr typename GenericFastStringBase<TChar>::ElementType const&
+        GenericFastStringBase<TChar>::operator[](ssize_t index) const noexcept
     {
         return m_p[index];
     }
 
     template <CChar TChar>
-    constexpr const GenericFastStringBase<TChar>::ElementType* GenericFastStringBase<TChar>::begin() const noexcept
+    constexpr const typename GenericFastStringBase<TChar>::ElementType*
+    GenericFastStringBase<TChar>::begin() const noexcept
     {
         return m_p;
     }
 
     template <CChar TChar>
-    constexpr const GenericFastStringBase<TChar>::ElementType* GenericFastStringBase<TChar>::end() const noexcept
+    constexpr const typename GenericFastStringBase<TChar>::ElementType*
+    GenericFastStringBase<TChar>::end() const noexcept
     {
         return m_p + m_length;
     }
@@ -314,7 +330,8 @@ namespace klib::Kongkong::Text
     }
 
     template <CChar TChar>
-    constexpr const GenericFastStringBase<TChar>::ElementType* GenericFastStringBase<TChar>::Data() const noexcept
+    constexpr const typename GenericFastStringBase<TChar>::ElementType*
+    GenericFastStringBase<TChar>::Data() const noexcept
     {
         return m_p;
     }
@@ -462,6 +479,24 @@ namespace klib::Kongkong::Text
             right.Length(),
             right.Data()
         );
+    }
+}
+
+#include "Kongkong.ArgumentOutOfRangeException.h"
+
+namespace klib::Kongkong::Text
+{
+    template <CChar TChar>
+    constexpr typename GenericFastStringBase<TChar>::ElementType const&
+    GenericFastStringBase<TChar>::At(
+        ssize_t index
+    ) const
+    {
+        if (index < 0 || m_length <= index) [[unlikely]] {
+            throw ArgumentOutOfRangeException(u"指定したインデックスが範囲外です");
+        }
+
+        return m_p[index];
     }
 }
 

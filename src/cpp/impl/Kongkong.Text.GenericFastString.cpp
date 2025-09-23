@@ -6,7 +6,9 @@
         GenericFastStringBase<TChar> const& right
     )
     {
-        GenericStringMemory<TChar> memory = GenericStringMemory<TChar>::AllocWithLengthUnsafe(left.Length() + right.Length());
+        GenericStringMemory<TChar> memory = GenericStringMemory<TChar>::AllocWithLengthUnsafe(
+            left.Length() + right.Length()
+        );
     
         TChar* p = memory.Pointer();
 
