@@ -12,7 +12,7 @@ namespace klib::Kongkong::Numerics
     template <class T>
     struct Number {
     public:
-        using NumberType = typename ::std::remove_const_t<T>;
+        using NumberType = typename T;
 
         [[nodiscard]] static consteval bool IsSigned() noexcept;
 

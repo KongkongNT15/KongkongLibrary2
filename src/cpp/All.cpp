@@ -12,6 +12,7 @@
 #include "impl/Kongkong.Text.GenericStaticString.cpp"
 #include "impl/Kongkong.Text.GenericString.cpp"
 #include "impl/Kongkong.Text.GenericStringMemory.cpp"
+#include "impl/Kongkong.Text.StringHelper.cpp"
 
 #include "impl/Kongkong.Threading.Mutex.cpp"
 

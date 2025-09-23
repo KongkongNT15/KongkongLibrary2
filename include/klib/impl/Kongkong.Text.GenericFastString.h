@@ -18,7 +18,7 @@ namespace klib::Kongkong::Text
         /// <summary>
         /// 基底クラス
         /// </summary>
-        using Base = GenericFastStringBase<TChar>;
+        using Base = typename GenericFastStringBase<TChar>;
 
         /// <summary>
         /// 要素型
@@ -85,6 +85,8 @@ namespace klib::Kongkong::Text
         [[nodiscard]] static constexpr GenericFastString FromMemoryUnsafe(
             GenericStringMemory<TChar> const& memory
         ) noexcept;
+
+        constexpr GenericFastString() noexcept;
 
         /// <summary>
         /// 文字列をコピー
@@ -165,6 +167,15 @@ namespace klib::Kongkong::Text
     }
 
     template <CChar TChar>
+    constexpr GenericFastString<TChar>::GenericFastString() noexcept
+        : Base(
+            0,
+            static_cast<const ElementType*>(nullptr)
+        )
+    {
+    }
+
+    template <CChar TChar>
     GenericFastString<TChar>::GenericFastString(
         Base const& right
     )
@@ -228,7 +239,8 @@ namespace klib::Kongkong::Text
     }
 
     template <CChar TChar>
-    constexpr const GenericFastString<TChar>::ElementType* GenericFastString<TChar>::c_str() const noexcept
+    constexpr const typename GenericFastString<TChar>::ElementType*
+    GenericFastString<TChar>::c_str() const noexcept
     {
         return this->m_p;
     }

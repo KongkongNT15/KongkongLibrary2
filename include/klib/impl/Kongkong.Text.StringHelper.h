@@ -150,6 +150,70 @@ namespace klib::Kongkong::Text
         /// ふぁ！？っく
         /// </summary>
         template <CChar TChar>
+        static GenericStringMemory<TChar> Dump(
+            ::std::nullptr_t
+        ) = delete;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static GenericStringMemory<TChar> Dump(
+            ssize_t,
+            ::std::nullptr_t
+        ) = delete;
+
+        template <CChar TChar>
+        [[nodiscard]] static GenericStringMemory<TChar> Dump(const TChar* str);
+
+        template <CChar TChar>
+        [[nodiscard]] static GenericStringMemory<TChar> Dump(ssize_t, const TChar* str);
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static GenericStringMemory<TChar> DumpUnsafe(
+            ::std::nullptr_t
+        ) = delete;
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
+        static GenericStringMemory<TChar> DumpUnsafe(
+            ssize_t,
+            ::std::nullptr_t
+        ) = delete;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TChar"></typeparam>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        template <CChar TChar>
+        [[nodiscard]] static GenericStringMemory<TChar> DumpUnsafe(
+            const TChar* str
+        );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TChar"></typeparam>
+        /// <param name="length"></param>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        template <CChar TChar>
+        [[nodiscard]] static GenericStringMemory<TChar> DumpUnsafe(
+            ssize_t length,
+            const TChar* str
+        );
+
+        /// <summary>
+        /// ふぁ！？っく
+        /// </summary>
+        template <CChar TChar>
         static constexpr bool EndsWithUnsafe(
             ssize_t,
             ::std::nullptr_t,

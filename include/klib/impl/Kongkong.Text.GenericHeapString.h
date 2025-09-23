@@ -3,6 +3,7 @@
 
 #include "base.h"
 #include "Kongkong.Text.GenericString.h"
+#include "Kongkong.Text.GenericFastString.h"
 
 namespace klib::Kongkong::Text
 {
