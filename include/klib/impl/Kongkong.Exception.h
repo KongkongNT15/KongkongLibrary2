@@ -19,7 +19,9 @@ namespace klib::Kongkong
 		
 	public:
 
-		constexpr Exception(String message) noexcept;
+		constexpr Exception(
+			String message
+		) noexcept;
 
 		/// <summary>
 		/// 例外メッセージを取得
@@ -37,7 +39,9 @@ namespace klib::Kongkong
 
 namespace klib::Kongkong
 {
-	constexpr Exception::Exception(String message) noexcept
+	constexpr Exception::Exception(
+		String message
+	) noexcept
 		: m_message(::std::move(message))
 	{
 	}

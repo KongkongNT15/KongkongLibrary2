@@ -2,6 +2,7 @@
 #define KLIB_KONGKONG_H
 
 #include "impl/Kongkong.ArgumentException.h"
+#include "impl/Kongkong.ArgumentNullException.h"
 #include "impl/Kongkong.ArgumentOutOfRangeException.h"
 #include "impl/Kongkong.Exception.h"
 #include "impl/Kongkong.GC.h"

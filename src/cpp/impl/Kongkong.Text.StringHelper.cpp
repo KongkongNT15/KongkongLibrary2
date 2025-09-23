@@ -1,7 +1,7 @@
 ﻿namespace klib::Kongkong::Text
 {
     template <CChar TChar>
-    GenericStringMemory<TChar> DumpUnsafe(
+    GenericStringMemory<TChar> StringHelper::DumpUnsafe(
         const TChar* str
     )
     {
@@ -12,7 +12,7 @@
     }
 
     template <CChar TChar>
-    GenericStringMemory<TChar> DumpUnsafe(
+    GenericStringMemory<TChar> StringHelper::DumpUnsafe(
         ssize_t length,
         const TChar* str
     )
@@ -23,8 +23,20 @@
             memory[i] = str[i];
         }
 
-        memory[length] = static_cast<TChar>('\0');
+        memory.SetNullTerminatorUnsafe();
 
         return memory;
     }
+
+    template GenericStringMemory<char> StringHelper::DumpUnsafe<char>(const char*);
+    template GenericStringMemory<wchar_t> StringHelper::DumpUnsafe<wchar_t>(const wchar_t*);
+    template GenericStringMemory<char8_t> StringHelper::DumpUnsafe<char8_t>(const char8_t*);
+    template GenericStringMemory<char16_t> StringHelper::DumpUnsafe<char16_t>(const char16_t*);
+    template GenericStringMemory<char32_t> StringHelper::DumpUnsafe<char32_t>(const char32_t*);
+
+    template GenericStringMemory<char> StringHelper::DumpUnsafe<char>(ssize_t, const char*);
+    template GenericStringMemory<wchar_t> StringHelper::DumpUnsafe<wchar_t>(ssize_t, const wchar_t*);
+    template GenericStringMemory<char8_t> StringHelper::DumpUnsafe<char8_t>(ssize_t, const char8_t*);
+    template GenericStringMemory<char16_t> StringHelper::DumpUnsafe<char16_t>(ssize_t, const char16_t*);
+    template GenericStringMemory<char32_t> StringHelper::DumpUnsafe<char32_t>(ssize_t, const char32_t*);
 }

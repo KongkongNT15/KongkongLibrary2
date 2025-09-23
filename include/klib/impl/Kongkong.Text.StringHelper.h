@@ -150,29 +150,6 @@ namespace klib::Kongkong::Text
         /// ふぁ！？っく
         /// </summary>
         template <CChar TChar>
-        static GenericStringMemory<TChar> Dump(
-            ::std::nullptr_t
-        ) = delete;
-
-        /// <summary>
-        /// ふぁ！？っく
-        /// </summary>
-        template <CChar TChar>
-        static GenericStringMemory<TChar> Dump(
-            ssize_t,
-            ::std::nullptr_t
-        ) = delete;
-
-        template <CChar TChar>
-        [[nodiscard]] static GenericStringMemory<TChar> Dump(const TChar* str);
-
-        template <CChar TChar>
-        [[nodiscard]] static GenericStringMemory<TChar> Dump(ssize_t, const TChar* str);
-
-        /// <summary>
-        /// ふぁ！？っく
-        /// </summary>
-        template <CChar TChar>
         static GenericStringMemory<TChar> DumpUnsafe(
             ::std::nullptr_t
         ) = delete;
@@ -722,7 +699,9 @@ namespace klib::Kongkong::Text
     }
 
     template <CChar TChar>
-    constexpr ssize_t StringHelper::GetLengthUnsafe(const TChar* p) noexcept
+    constexpr ssize_t StringHelper::GetLengthUnsafe(
+        const TChar* p
+    ) noexcept
     {
         const TChar* p1 = p;
 

@@ -209,6 +209,7 @@ namespace klib::Kongkong
     class Object;
 
     struct ArgumentException;
+    struct ArgumentNullException;
     struct ArgumentOutOfRangeException;
     struct Exception;
     class HandleType;
