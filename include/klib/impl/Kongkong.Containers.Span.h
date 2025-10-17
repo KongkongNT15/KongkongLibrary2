@@ -170,11 +170,12 @@ namespace klib::Kongkong::Containers
     }
 
     template <class T>
-    constexpr ReadOnlySpan<::std::remove_const_t<typename Span<T>::ElementType>> Span<T>::AsReadOnly() const noexcept
+    constexpr ReadOnlySpan<::std::remove_const_t<typename Span<T>::ElementType>>
+    Span<T>::AsReadOnly() const noexcept
     {
         return ReadOnlySpan<::std::remove_const_t<typename Span<T>::ElementType>>::CreateUnsafe(
-            length,
-            p
+            m_length,
+            m_p
         );
     }
 

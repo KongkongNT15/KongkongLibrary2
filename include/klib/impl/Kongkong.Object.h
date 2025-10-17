@@ -447,7 +447,7 @@ namespace klib::Kongkong
         }
 #endif
         TObj obj = nullptr;
-        obj.SetInstance(p1);
+        obj.SetInstance(p);
         Object::AddRef(p);
 
         return obj;

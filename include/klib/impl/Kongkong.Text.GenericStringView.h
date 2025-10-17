@@ -85,8 +85,10 @@ namespace klib::Kongkong::Text
         const ElementType* p,
         NonType
     ) noexcept
-        : m_length(StringHelper::GetLengthUnsafe(p))
-        , m_p(p)
+        : Base(
+            StringHelper::GetLengthUnsafe(p),
+            p
+        )
     {
     }
 
@@ -96,8 +98,10 @@ namespace klib::Kongkong::Text
         const ElementType* p,
         NonType
     ) noexcept
-        : m_length(length)
-        , m_p(p)
+        : Base(
+            length,
+            p
+        )
     {
     }
 

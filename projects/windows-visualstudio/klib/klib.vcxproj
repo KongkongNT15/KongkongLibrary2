@@ -19,6 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\cppm\klib.cppm" />
+    <ClCompile Include="..\..\..\src\cppm\klib.Kongkong.Containers.cppm" />
+    <ClCompile Include="..\..\..\src\cppm\klib.Kongkong.cppm" />
+    <ClCompile Include="..\..\..\src\cppm\klib.Kongkong.Text.cppm" />
     <ClCompile Include="..\..\..\src\cpp\All.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -119,7 +123,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalIncludeDirectories>..\..\..\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>..\..\..\src\cpp\All.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>..\..\src\cpp\All.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -141,7 +145,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalIncludeDirectories>..\..\..\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
-      <ForcedIncludeFiles>..\..\..\src\cpp\All.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>..\..\src\cpp\All.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>

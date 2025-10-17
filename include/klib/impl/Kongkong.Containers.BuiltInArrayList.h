@@ -182,7 +182,7 @@ namespace klib::Kongkong::Containers
         ssize_t index
     ) noexcept
     {
-        return Arr[index];
+        return m_arr[index];
     }
 
     template <class T, ssize_t N>
@@ -191,7 +191,7 @@ namespace klib::Kongkong::Containers
         ssize_t index
     ) const noexcept
     {
-        return Arr[index];
+        return m_arr[index];
     }
 
     template <class T, ssize_t N>
