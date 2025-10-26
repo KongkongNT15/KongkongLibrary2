@@ -2,18 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\..\..\src\cpp\All.cpp" />
-    <ClCompile Include="..\..\..\src\cppm\klib.cppm">
-      <Filter>cppm</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\cppm\klib.Kongkong.Containers.cppm">
-      <Filter>cppm</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\cppm\klib.Kongkong.cppm">
-      <Filter>cppm</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\cppm\klib.Kongkong.Text.cppm">
-      <Filter>cppm</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

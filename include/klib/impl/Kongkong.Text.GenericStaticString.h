@@ -3,6 +3,8 @@
 
 #include "base.h"
 #include "Kongkong.Text.GenericString.h"
+#include "Kongkong.Text.GenericStringView.h"
+#include "Kongkong.Text.GenericStaticFastString.h"
 
 namespace klib::Kongkong::Text
 {
@@ -10,7 +12,7 @@ namespace klib::Kongkong::Text
     /// 静的領域に配置される文字列
     /// </summary>
     /// <typeparam name="TChar">文字型</typeparam>
-    template <CChar TChar>
+    template <CChar TChar, ssize_t N>
     class GenericStaticString : public GenericString<TChar> {
     public:
         /// <summary>
@@ -20,11 +22,22 @@ namespace klib::Kongkong::Text
         struct ImplType : public GenericString<TChar>::ImplType {
         private:
 
+            GenericStaticFastString<TChar, N> m_string;
+            GenericStringView<TChar> m_view;
+
         public:
 
-            template <ssize_t N>
             ImplType(const TChar(&arr)[N]) noexcept
-                : GenericString<TChar>::ImplType(N - 1, arr)
+                : GenericString<TChar>::ImplType(
+                    &m_view
+                )
+                , m_string(arr)
+                , m_view(
+                    GenericStringView<TChar>::CreateUnsafe(
+                        m_string.Length(),
+                        m_string.Data()
+                    )
+                )
             {
                 Object::ImplType::SetAsNonDeleteObject();
             }
@@ -32,14 +45,18 @@ namespace klib::Kongkong::Text
 
         KLIB_KONGKONG_OBJECT_OMAJINAI(GenericStaticString, GenericString<TChar>);
 
-        explicit constexpr GenericStaticString(ImplType& value) noexcept;
+        explicit constexpr GenericStaticString(
+            ImplType& value
+        ) noexcept;
     };
 }
 
 namespace klib::Kongkong::Text
 {
-    template <CChar TChar>
-    constexpr GenericStaticString<TChar>::GenericStaticString(ImplType& value) noexcept
+    template <CChar TChar, ssize_t N>
+    constexpr GenericStaticString<TChar, N>::GenericStaticString(
+        ImplType& value
+    ) noexcept
         : GenericString<TChar>(nullptr)
     {
         Object::SetInstanceUnsafe(&value);

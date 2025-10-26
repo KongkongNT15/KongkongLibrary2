@@ -124,7 +124,7 @@ namespace klib::Kongkong::Text
         /// <summary>
         /// この文字列のビューを取得
         /// </summary>
-        [[nodiscard]] GenericStringView<TChar> GetView() const noexcept;
+        [[nodiscard]] constexpr GenericStringView<TChar> GetView() const noexcept;
 
         /// <summary>
         /// 文字列中の指定の文字の要素番号を取得

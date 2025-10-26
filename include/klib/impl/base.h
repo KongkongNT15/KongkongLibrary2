@@ -347,7 +347,7 @@ namespace klib::Kongkong::Text
     template <CChar TChar>
     class GenericHeapString;
 
-    template <CChar TChar>
+    template <CChar TChar, ssize_t N>
     class GenericStaticString;
 
     class StaticStringHelper;
@@ -429,12 +429,23 @@ namespace klib::Kongkong::Text
     using HeapUtf16String = GenericHeapString<char16_t>;
     using HeapUtf32String = GenericHeapString<char32_t>;
 
-    using StaticString = GenericStaticString<char16_t>;
-    using StaticCharString = GenericStaticString<char>;
-    using StaticWCharString = GenericStaticString<wchar_t>;
-    using StaticUtf8String = GenericStaticString<char8_t>;
-    using StaticUtf16String = GenericStaticString<char16_t>;
-    using StaticUtf32String = GenericStaticString<char32_t>;
+    template <ssize_t N>
+    using StaticString = GenericStaticString<char16_t, N>;
+
+    template <ssize_t N>
+    using StaticCharString = GenericStaticString<char, N>;
+
+    template <ssize_t N>
+    using StaticWCharString = GenericStaticString<wchar_t, N>;
+
+    template <ssize_t N>
+    using StaticUtf8String = GenericStaticString<char8_t, N>;
+
+    template <ssize_t N>
+    using StaticUtf16String = GenericStaticString<char16_t, N>;
+
+    template <ssize_t N>
+    using StaticUtf32String = GenericStaticString<char32_t, N>;
 
     template <ssize_t N = 0>
     using StaticFastString = GenericStaticFastString<char16_t, N>;

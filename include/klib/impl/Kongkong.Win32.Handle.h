@@ -12,7 +12,7 @@ namespace klib::Kongkong::Win32
     /// Win32ハンドル
     /// </summary>
     class Handle : public HandleType {
-        friend constexpr bool operator==(
+        friend bool operator==(
             Handle const& left,
             ::std::nullptr_t
         ) noexcept;
@@ -21,7 +21,7 @@ namespace klib::Kongkong::Win32
             /// <summary>
             /// 無効な値を取得
             /// </summary>
-            [[nodiscard]] static consteval ::HANDLE InvalidValue() noexcept;
+            [[nodiscard]] static ::HANDLE InvalidValue() noexcept;
 
             /// <summary>
             /// Win32の生ハンドル
@@ -49,12 +49,12 @@ namespace klib::Kongkong::Win32
         /// 
         /// </summary>
         /// <returns></returns>
-        [[nodiscard]] constexpr bool operator!() const noexcept;
+        [[nodiscard]] bool operator!() const noexcept;
 
         /// <summary>
         /// 
         /// </summary>
-        [[nodiscard]] constexpr operator bool() const noexcept;
+        [[nodiscard]] operator bool() const noexcept;
 
         /// <summary>
         /// Win32の生ハンドルを取得
@@ -67,7 +67,7 @@ namespace klib::Kongkong::Win32
     /// </summary>
     /// <param name="left"></param>
     /// <returns></returns>
-    [[nodiscard]] constexpr bool operator==(
+    [[nodiscard]] bool operator==(
         Handle const& left,
         ::std::nullptr_t
     ) noexcept;
@@ -77,7 +77,7 @@ namespace klib::Kongkong::Win32
     /// </summary>
     /// <param name="right"></param>
     /// <returns></returns>
-    [[nodiscard]] constexpr bool operator==(
+    [[nodiscard]] bool operator==(
         ::std::nullptr_t,
         Handle const& right
     ) noexcept;
@@ -87,7 +87,7 @@ namespace klib::Kongkong::Win32
     /// </summary>
     /// <param name="left"></param>
     /// <returns></returns>
-    [[nodiscard]] constexpr bool operator!=(
+    [[nodiscard]] bool operator!=(
         Handle const& left,
         ::std::nullptr_t
         ) noexcept;
@@ -97,7 +97,7 @@ namespace klib::Kongkong::Win32
     /// </summary>
     /// <param name="right"></param>
     /// <returns></returns>
-    [[nodiscard]] constexpr bool operator!=(
+    [[nodiscard]] bool operator!=(
         ::std::nullptr_t,
         Handle const& right
         ) noexcept;
@@ -105,7 +105,7 @@ namespace klib::Kongkong::Win32
 
 namespace klib::Kongkong::Win32
 {
-    consteval ::HANDLE Handle::s_handle::InvalidValue() noexcept
+    inline ::HANDLE Handle::s_handle::InvalidValue() noexcept
     {
         return INVALID_HANDLE_VALUE;
     }
@@ -123,12 +123,12 @@ namespace klib::Kongkong::Win32
         m_handle = InvalidValue();
     }
 
-    constexpr bool Handle::operator!() const noexcept
+    inline bool Handle::operator!() const noexcept
     {
         return m_handle.m_handle == Handle::s_handle::InvalidValue();
     }
 
-    constexpr Handle::operator bool() const noexcept
+    inline Handle::operator bool() const noexcept
     {
         return m_handle.m_handle != Handle::s_handle::InvalidValue();
     }
@@ -138,7 +138,7 @@ namespace klib::Kongkong::Win32
         return m_handle.m_handle;
     }
 
-    constexpr bool operator==(
+    inline bool operator==(
         Handle const& left,
         ::std::nullptr_t
     ) noexcept
@@ -146,7 +146,7 @@ namespace klib::Kongkong::Win32
         return left.RawHandle() == Handle::s_handle::InvalidValue();
     }
 
-    constexpr bool operator==(
+    inline bool operator==(
         ::std::nullptr_t,
         Handle const& right
     ) noexcept
@@ -154,7 +154,7 @@ namespace klib::Kongkong::Win32
         return right == nullptr;
     }
 
-    constexpr bool operator!=(
+    inline bool operator!=(
         Handle const& left,
         ::std::nullptr_t
         ) noexcept
@@ -162,7 +162,7 @@ namespace klib::Kongkong::Win32
         return !(left == nullptr);
     }
 
-    constexpr bool operator!=(
+    inline bool operator!=(
         ::std::nullptr_t,
         Handle const& right
         ) noexcept

@@ -1,5 +1,5 @@
-﻿#ifndef IMPL_KONGKONG_MEMORYALLOCATIONEXCEPTION_H
-#define IMPL_KONGKONG_MEMORYALLOCATIONEXCEPTION_H
+﻿#ifndef KLIB_KONGKONG_MEMORYALLOCATIONEXCEPTION_H
+#define KLIB_KONGKONG_MEMORYALLOCATIONEXCEPTION_H
 
 #include "base.h"
 #include "Kongkong.Exception.h"
@@ -13,7 +13,7 @@ namespace klib::Kongkong
 	struct MemoryAllocationException : public Exception {
 	private:
 
-		Text::StaticString s_outOfMemoryMessage;
+		Text::StaticString<1> s_outOfMemoryMessage;
 		
 	public:
 		/// <summary>
@@ -26,4 +26,4 @@ namespace klib::Kongkong
 	};
 }
 
-#endif //!IMPL_KONGKONG_MEMORYALLOCATIONEXCEPTION_H
+#endif //!KLIB_KONGKONG_MEMORYALLOCATIONEXCEPTION_H

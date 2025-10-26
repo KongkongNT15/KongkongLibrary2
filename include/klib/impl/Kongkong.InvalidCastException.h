@@ -13,7 +13,7 @@ namespace klib::Kongkong
     struct InvalidCastException : public Exception {
     private:
 
-        static Text::StaticString::ImplType s_message;
+        static Text::StaticString<12>::ImplType s_message;
 
     public:
         InvalidCastException() noexcept;
@@ -24,7 +24,7 @@ namespace klib::Kongkong
 namespace klib::Kongkong
 {
     inline InvalidCastException::InvalidCastException() noexcept
-        : Exception(Text::StaticString(s_message))
+        : Exception(Text::StaticString<12>(s_message))
     {
     }
 }

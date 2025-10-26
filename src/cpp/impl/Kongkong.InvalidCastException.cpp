@@ -1,5 +1,5 @@
 ﻿namespace klib::Kongkong
 {
-	Text::StaticString::ImplType InvalidCastException::s_message = u"キャストに失敗しました";
+	Text::StaticString<12>::ImplType InvalidCastException::s_message = u"キャストに失敗しました";
 
 }

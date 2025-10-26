@@ -128,7 +128,8 @@ namespace klib::Kongkong::Text
 namespace klib::Kongkong::Text
 {
     template <CChar TChar>
-    constexpr GenericStringView<TChar> GenericFastStringBase<TChar>::GetView() const noexcept
+    constexpr GenericStringView<TChar>
+    GenericFastStringBase<TChar>::GetView() const noexcept
     {
         return GenericStringView<TChar>::CreateUnsafe(
             m_length,

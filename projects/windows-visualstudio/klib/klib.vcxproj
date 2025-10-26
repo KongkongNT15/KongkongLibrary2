@@ -19,10 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\cppm\klib.cppm" />
-    <ClCompile Include="..\..\..\src\cppm\klib.Kongkong.Containers.cppm" />
-    <ClCompile Include="..\..\..\src\cppm\klib.Kongkong.cppm" />
-    <ClCompile Include="..\..\..\src\cppm\klib.Kongkong.Text.cppm" />
     <ClCompile Include="..\..\..\src\cpp\All.cpp" />
   </ItemGroup>
   <ItemGroup>

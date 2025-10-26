@@ -14,8 +14,8 @@ namespace klib::Kongkong::Text
 	template <CChar TChar, ssize_t N>
 	struct StaticStringHelperResult : public ValueType {
 	private:
-		GenericStaticString<TChar> m_ref;
-		GenericStaticString<TChar>::ImplType<N> m_result;
+		GenericStaticString<TChar, N> m_ref;
+		GenericStaticString<TChar, N>::ImplType m_result;
 	public:
 
 		constexpr StaticStringHelperResult() noexcept;
@@ -24,13 +24,13 @@ namespace klib::Kongkong::Text
 		/// 文字列を取得
 		/// </summary>
 		/// <returns>文字列インスタンス</returns>
-		[[nodiscard]] GenericStaticString<TChar>& Reference() noexcept;
+		[[nodiscard]] GenericStaticString<TChar, N>& Reference() noexcept;
 
 		/// <summary>
 		/// 文字列を取得
 		/// </summary>
 		/// <returns>文字列インスタンス</returns>
-		[[nodiscard]] GenericStaticString<TChar> const& Reference() const noexcept;
+		[[nodiscard]] GenericStaticString<TChar, N> const& Reference() const noexcept;
 
 		/// <summary>
 		/// 

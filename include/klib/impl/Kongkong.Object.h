@@ -399,12 +399,12 @@ namespace klib::Kongkong
 
     constexpr ::std::strong_ordering operator<=>(Object const& left, ::std::nullptr_t) noexcept
     {
-        return left.GetPointer() <=> nullptr;
+        return left.GetPointer() <=> static_cast<Object::ImplType*>(nullptr);
     }
 
     constexpr ::std::strong_ordering operator<=>(::std::nullptr_t, Object const& right) noexcept
     {
-        return nullptr <=> right.GetPointer();
+        return static_cast<Object::ImplType*>(nullptr) <=> right.GetPointer();
     }
 }
 
@@ -413,7 +413,7 @@ namespace klib::Kongkong
 
 namespace klib::Kongkong
 {
-    template <class TImpl> requires ::std::derived_from<TImpl, Object::ImplType>
+    template <class TImpl> requires ::std::derived_from<TImpl, typename Object::ImplType>
     constexpr TImpl* Object::GetPointerChecked() const
     {
         TImpl* p = static_cast<TImpl*>(GetPointer());

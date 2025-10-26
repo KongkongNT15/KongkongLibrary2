@@ -147,7 +147,7 @@ namespace klib::Kongkong::Text
         const ElementType(&arr)[N]
     )
     {
-        return GenericFastString(
+        return GenericFastString<TChar>(
             N - 1,
             &arr[0],
             {}
@@ -159,9 +159,9 @@ namespace klib::Kongkong::Text
         GenericStringMemory<TChar> const& memory
     ) noexcept
     {
-        return GenericFastString(
+        return GenericFastString<TChar>(
             memory.Capacity() - 1,
-            memory.Pointer()
+            memory.Pointer(),
             {}
         );
     }
@@ -199,8 +199,8 @@ namespace klib::Kongkong::Text
 
     template <CChar TChar>
     constexpr GenericFastString<TChar>::GenericFastString(
-        GenericFastString<TChar> && right
-    )
+        GenericFastString<TChar>&& right
+    ) noexcept
         : Base(
             right.Length(),
             right.Data()
@@ -227,7 +227,7 @@ namespace klib::Kongkong::Text
     template <CChar TChar>
     constexpr GenericFastString<TChar>& GenericFastString<TChar>::operator=(
         GenericFastString<TChar>&& right
-    )
+    ) noexcept
     {
         delete[] this->m_p;
         this->m_p = right.m_p;
