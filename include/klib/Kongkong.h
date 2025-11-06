@@ -4,6 +4,7 @@
 #include "impl/Kongkong.ArgumentException.h"
 #include "impl/Kongkong.ArgumentNullException.h"
 #include "impl/Kongkong.ArgumentOutOfRangeException.h"
+#include "impl/Kongkong.ErrorCode.h"
 #include "impl/Kongkong.Exception.h"
 #include "impl/Kongkong.GC.h"
 #include "impl/Kongkong.HandleType.h"

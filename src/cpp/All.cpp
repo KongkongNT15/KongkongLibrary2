@@ -2,6 +2,7 @@
 
 #include <ostream>
 
+#include "impl/Kongkong.ErrorCode.cpp"
 #include "impl/Kongkong.GC.cpp"
 #include "impl/Kongkong.InvalidCastException.cpp"
 #include "impl/Kongkong.Object.cpp"

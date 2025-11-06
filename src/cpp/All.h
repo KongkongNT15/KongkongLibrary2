@@ -9,6 +9,7 @@
 
 #include <klib/Kongkong.h>
 #include <klib/Kongkong.Containers.h>
+#include <klib/Kongkong.Memory.h>
 #include <klib/Kongkong.Numerics.h>
 #include <klib/Kongkong.IO.h>
 #include <klib/Kongkong.Text.h>

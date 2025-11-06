@@ -211,6 +211,7 @@ namespace klib::Kongkong
     struct ArgumentException;
     struct ArgumentNullException;
     struct ArgumentOutOfRangeException;
+    struct ErrorCode;
     struct Exception;
     class HandleType;
     struct InvalidCastException;
@@ -265,6 +266,12 @@ namespace klib::Kongkong::Containers
 namespace klib::Kongkong::IO
 {
 
+}
+
+namespace klib::Kongkong::Memory
+{
+    struct GCMemoryBlock;
+    struct MemoryBlock;
 }
 
 /// <summary>
