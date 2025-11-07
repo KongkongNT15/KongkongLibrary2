@@ -271,8 +271,8 @@ namespace klib::Kongkong::IO
 
 namespace klib::Kongkong::Memory
 {
-    class GCMemory;
     struct GCMemoryBlock;
+    class GCPointer;
     struct MemoryBlock;
 }
 

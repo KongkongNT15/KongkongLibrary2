@@ -1,12 +1,13 @@
-﻿#ifndef KLIB_KONGKONG_MEMORY_GCMEMORY_H
-#define KLIB_KONGKONG_MEMORY_GCMEMORY_H
+﻿#ifndef KLIB_KONGKONG_MEMORY_GCPOINTER_H
+#define KLIB_KONGKONG_MEMORY_GCPOINTER_H
 
 #include "base.h"
 #include "Kongkong.PointerType.h"
 
 namespace klib::Kongkong::Memory
 {
-    class GCMemory final : PointerType {
+    class GCPointer final : PointerType {
+        friend GC;
         private:
         ssize_t m_hashCode;
 
@@ -18,103 +19,103 @@ namespace klib::Kongkong::Memory
     };
 
     [[nodiscard]] constexpr bool operator==(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept;
 
     [[nodiscard]] constexpr bool operator!=(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept;
 
     [[nodiscard]] constexpr bool operator<(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept;
 
     [[nodiscard]] constexpr bool operator<=(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept;
 
     [[nodiscard]] constexpr bool operator>(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept;
 
     [[nodiscard]] constexpr bool operator>=(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept;
 
     [[nodiscard]] constexpr ::std::strong_ordering operator<=>(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept;
 }
 
 namespace klib::Kongkong::Memory
 {
-    constexpr ssize_t GCMemory::HashCode() const noexcept
+    constexpr ssize_t GCPointer::HashCode() const noexcept
     {
         return m_hashCode;
     }
 
     constexpr bool operator==(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept
     {
         return left.HashCode() == right.HashCode();
     }
 
     constexpr bool operator!=(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept
     {
         return left.HashCode() != right.HashCode();
     }
 
     constexpr bool operator<(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept
     {
         return left.HashCode() < right.HashCode();
     }
 
     constexpr bool operator<=(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept
     {
         return left.HashCode() <= right.HashCode();
     }
 
     constexpr bool operator>(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept
     {
         return left.HashCode() > right.HashCode();
     }
 
     constexpr bool operator>=(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept
     {
         return left.HashCode() >= right.HashCode();
     }
 
     constexpr ::std::strong_ordering operator<=>(
-        GCMemory const& left,
-        GCMemory const& right
+        GCPointer const& left,
+        GCPointer const& right
     ) noexcept
     {
         return left.HashCode() <=> right.HashCode();
     }
 }
 
-#endif //!KLIB_KONGKONG_MEMORY_GCMEMORY_H
+#endif //!KLIB_KONGKONG_MEMORY_GCPOINTER_H
