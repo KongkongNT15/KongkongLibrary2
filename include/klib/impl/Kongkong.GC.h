@@ -17,7 +17,7 @@ namespace klib::Kongkong
 
         KLIB_STATIC_CLASS(GC);
 
-        [[nodiscard]] static Memory::GCMemory Alloc(
+        [[nodiscard]] static Memory::GCPointer Alloc(
             ssize_t size
         );
 
@@ -32,13 +32,13 @@ namespace klib::Kongkong
         ) noexcept;
 
         template <class TClass, class... Args>
-        [[nodiscard]] static Memory::GCMemory New(
+        [[nodiscard]] static Memory::GCObjectPointer<TClass> New(
             Args&&... args
         );
     };
 }
 
-#include "Kongkong.Memory.GCMemory.h"
+#include "Kongkong.Memory.GCPointer.h"
 
 namespace klib::Kongkong
 {

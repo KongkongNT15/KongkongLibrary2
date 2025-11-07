@@ -8,12 +8,42 @@ namespace klib::Kongkong::Memory
 {
     class GCPointer final : PointerType {
         friend GC;
-        private:
-        ssize_t m_hashCode;
+    private:
+        void* m_pointer;
 
-        public:
+        constexpr GCPointer(
+            void* pointer
+        ) noexcept;
 
-        [[nodiscard]] constexpr ssize_t HashCode() const noexcept;
+    public:
+
+        [[nodiscard]] static GCPointer Null() noexcept;
+
+        constexpr GCPointer(
+            ::std::nullptr_t
+        ) noexcept;
+
+        GCPointer(
+            GCPointer const& other
+        );
+
+        constexpr GCPointer(
+            GCPointer&& other
+        ) noexcept;
+
+        ~GCPointer();
+
+        GCPointer& operator=(
+            ::std::nullptr_t
+        ) noexcept;
+
+        GCPointer& operator=(
+            GCPointer const& other
+        );
+
+        GCPointer& operator=(
+            GCPointer&& other
+        );
 
         [[nodiscard]] void* RawPointer() const noexcept;
     };
@@ -56,17 +86,12 @@ namespace klib::Kongkong::Memory
 
 namespace klib::Kongkong::Memory
 {
-    constexpr ssize_t GCPointer::HashCode() const noexcept
-    {
-        return m_hashCode;
-    }
-
     constexpr bool operator==(
         GCPointer const& left,
         GCPointer const& right
     ) noexcept
     {
-        return left.HashCode() == right.HashCode();
+        return left.RawPointer() == right.RawPointer();
     }
 
     constexpr bool operator!=(
@@ -74,7 +99,7 @@ namespace klib::Kongkong::Memory
         GCPointer const& right
     ) noexcept
     {
-        return left.HashCode() != right.HashCode();
+        return left.RawPointer() != right.RawPointer();
     }
 
     constexpr bool operator<(
@@ -82,7 +107,7 @@ namespace klib::Kongkong::Memory
         GCPointer const& right
     ) noexcept
     {
-        return left.HashCode() < right.HashCode();
+        return left.RawPointer() < right.RawPointer();
     }
 
     constexpr bool operator<=(
@@ -90,7 +115,7 @@ namespace klib::Kongkong::Memory
         GCPointer const& right
     ) noexcept
     {
-        return left.HashCode() <= right.HashCode();
+        return left.RawPointer() <= right.RawPointer();
     }
 
     constexpr bool operator>(
@@ -98,7 +123,7 @@ namespace klib::Kongkong::Memory
         GCPointer const& right
     ) noexcept
     {
-        return left.HashCode() > right.HashCode();
+        return left.RawPointer() > right.RawPointer();
     }
 
     constexpr bool operator>=(
@@ -106,7 +131,7 @@ namespace klib::Kongkong::Memory
         GCPointer const& right
     ) noexcept
     {
-        return left.HashCode() >= right.HashCode();
+        return left.RawPointer() >= right.RawPointer();
     }
 
     constexpr ::std::strong_ordering operator<=>(
@@ -114,7 +139,7 @@ namespace klib::Kongkong::Memory
         GCPointer const& right
     ) noexcept
     {
-        return left.HashCode() <=> right.HashCode();
+        return left.RawPointer() <=> right.RawPointer();
     }
 }
 
