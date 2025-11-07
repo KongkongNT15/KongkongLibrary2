@@ -17,18 +17,32 @@ namespace klib::Kongkong
 
         KLIB_STATIC_CLASS(GC);
 
-        static bool Close() noexcept;
+        [[nodiscard]] static Memory::GCMemory Alloc(
+            ssize_t size
+        );
+
+        static ErrorCode Close() noexcept;
 
         /// <summary>
         /// GCの初期化
         /// </summary>
         /// <returns></returns>
-        static bool Initialize(
-            
+        static ErrorCode Initialize(
+            ssize_t blockSize
         ) noexcept;
 
-        
+        template <class TClass, class... Args>
+        [[nodiscard]] static Memory::GCMemory New(
+            Args&&... args
+        );
     };
+}
+
+#include "Kongkong.Memory.GCMemory.h"
+
+namespace klib::Kongkong
+{
+
 }
 
 #endif //!KLIB_KONGKONG_GC_H

@@ -218,6 +218,7 @@ namespace klib::Kongkong
     struct MemoryAllocationException;
     struct NonType;
     struct NullPointerException;
+    class PointerType;
     struct ValueType;
 }
 
@@ -270,6 +271,7 @@ namespace klib::Kongkong::IO
 
 namespace klib::Kongkong::Memory
 {
+    class GCMemory;
     struct GCMemoryBlock;
     struct MemoryBlock;
 }
