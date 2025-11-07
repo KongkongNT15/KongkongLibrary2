@@ -45,7 +45,7 @@ namespace klib::Kongkong::Memory
             GCPointer&& other
         );
 
-        [[nodiscard]] void* RawPointer() const noexcept;
+        [[nodiscard]] constexpr void* RawPointer() const noexcept;
     };
 
     [[nodiscard]] constexpr bool operator==(
@@ -86,6 +86,11 @@ namespace klib::Kongkong::Memory
 
 namespace klib::Kongkong::Memory
 {
+    constexpr void* GCPointer::RawPointer() const noexcept
+    {
+        return m_pointer;
+    }
+
     constexpr bool operator==(
         GCPointer const& left,
         GCPointer const& right
