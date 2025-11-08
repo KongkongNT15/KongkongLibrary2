@@ -243,6 +243,9 @@ namespace klib::Kongkong::Containers
 
     class ContainerHelper;
 
+    template <class T>
+    struct ArrayList;
+
     template <class T, ssize_t N>
     struct BuiltInArray;
 
@@ -272,6 +275,8 @@ namespace klib::Kongkong::IO
 namespace klib::Kongkong::Memory
 {
     struct GCMemoryBlock;
+
+    enum struct GCMemoryPolicy;
 
     template <class T>
     class GCObjectPointer;

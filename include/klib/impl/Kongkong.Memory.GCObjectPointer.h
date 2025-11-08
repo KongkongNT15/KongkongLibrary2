@@ -19,6 +19,10 @@ namespace klib::Kongkong::Memory
 
     public:
 
+        constexpr GCObjectPointer(
+            ::std::nullptr_t
+        ) noexcept;
+
         [[nodiscard]] constexpr T& operator[](
             ssize_t index
         ) const noexcept;
@@ -29,6 +33,20 @@ namespace klib::Kongkong::Memory
 
 namespace klib::Kongkong::Memory
 {
+    template <class T>
+    constexpr GCObjectPointer<T>::GCObjectPointer(
+        ::std::nullptr_t
+    ) noexcept
+        : m_pointer(nullptr)
+    {
+    }
+
+    template <class T>
+    GCObjectPointer<T> GCPointer::Cast() const noexcept
+    {
+        return GCObjectPointer<T>(*this);
+    }
+
     template <class T>
     GCObjectPointer<T>::GCObjectPointer(
         GCPointer pointer

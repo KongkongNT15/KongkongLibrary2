@@ -16,7 +16,8 @@ namespace klib::Kongkong::Containers
         /// <summary>
         /// IndexOf()で要素が見つからなかった時の戻り値
         /// </summary>
-        [[nodiscard]] static consteval ssize_t NotFound() noexcept;
+        [[nodiscard]] static consteval ssize_t NotFound(
+        ) noexcept;
 
         /// <summary>
         /// ふぁ！？っく
@@ -144,7 +145,8 @@ namespace klib::Kongkong::Containers
 
 namespace klib::Kongkong::Containers
 {
-    consteval ssize_t ContainerHelper::NotFound() noexcept
+    consteval ssize_t ContainerHelper::NotFound(
+    ) noexcept
     {
         return -1;
     }

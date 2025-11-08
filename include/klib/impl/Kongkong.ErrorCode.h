@@ -2,13 +2,14 @@
 #define KLIB_KONGKONG_ERRORCODE_H
 
 #include "base.h"
+#include "Kongkong.ValueType.h"
 
 namespace klib::Kongkong
 {
     /// <summary>
     /// エラーコード
     /// </summary>
-    struct ErrorCode {
+    struct ErrorCode final : public ValueType {
     private:
         enum s_code : uint32_t {
             NoError,

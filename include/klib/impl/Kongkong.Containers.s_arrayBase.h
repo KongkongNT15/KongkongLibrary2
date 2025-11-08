@@ -3,6 +3,7 @@
 
 #include "base.h"
 #include "Kongkong.Containers.s_containerBase.h"
+#include "Kongkong.Memory.GCObjectPointer.h"
 
 namespace klib::Kongkong::Containers
 {
@@ -15,16 +16,33 @@ namespace klib::Kongkong::Containers
     public:
         
     protected:
-        T* m_p;
+        Memory::GCObjectPointer<T> m_p;
 
         explicit constexpr s_arrayBase(
             ssize_t length,
-            T* p
+            Memory::GCObjectPointer<T> p
         ) noexcept;
     public:
 
-        
+        [[nodiscard]] constexpr bool StartsWith(
+            T const& value
+        ) const noexcept;
     };
+}
+
+namespace klib::Kongkong::Containers
+{
+    template <class T>
+    constexpr bool s_arrayBase<T>::StartsWith(
+        T const& value
+    ) const noexcept
+    {
+        return ContainerHelper::StartsWithUnsafe(
+            this->m_length,
+            m_p.RawPointer(),
+            value
+        );
+    }
 }
 
 #endif //!KLIB_KONGKONG_CONTAINTERS_ARRAYBASE_H

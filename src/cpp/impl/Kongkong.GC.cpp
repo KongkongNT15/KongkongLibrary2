@@ -4,7 +4,8 @@
     constinit ssize_t GC::s_length = 0;
     constinit void* GC::s_pointer = nullptr;
 
-    ErrorCode GC::Close() noexcept
+    ErrorCode GC::Close(
+    ) noexcept
     {
         if (!s_isInitialized) [[unlikely]] return ErrorCode::AlreadyClosed();
 

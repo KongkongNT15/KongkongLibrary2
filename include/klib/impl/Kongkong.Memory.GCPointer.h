@@ -45,6 +45,9 @@ namespace klib::Kongkong::Memory
             GCPointer&& other
         );
 
+        template <class T>
+        [[nodiscard]] GCObjectPointer<T> Cast() const noexcept;
+
         [[nodiscard]] constexpr void* RawPointer() const noexcept;
     };
 
