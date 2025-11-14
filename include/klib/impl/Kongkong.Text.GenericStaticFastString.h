@@ -293,13 +293,15 @@ namespace klib::Kongkong::Text
     }
 
     template <CChar TChar, ssize_t N>
-    constexpr GenericStaticFastString<TChar, N>::ElementType* GenericStaticFastString<TChar, N>::Data() noexcept
+    constexpr GenericStaticFastString<TChar, N>::ElementType*
+    GenericStaticFastString<TChar, N>::Data() noexcept
     {
         return m_arr;
     }
 
     template <CChar TChar, ssize_t N>
-    constexpr const GenericStaticFastString<TChar, N>::ElementType* GenericStaticFastString<TChar, N>::Data() const noexcept
+    constexpr const GenericStaticFastString<TChar, N>::ElementType*
+    GenericStaticFastString<TChar, N>::Data() const noexcept
     {
         return m_arr;
     }
@@ -370,7 +372,8 @@ namespace klib::Kongkong::Text
     }
 
     template <CChar TChar, ssize_t N>
-    consteval GenericStaticFastString<TChar, N> GenericStaticFastString<char16_t, 0>::FromLiteral(
+    consteval GenericStaticFastString<TChar, N>
+    GenericStaticFastString<char16_t, 0>::FromLiteral(
         const TChar(&arr)[N]
     ) noexcept
     {
