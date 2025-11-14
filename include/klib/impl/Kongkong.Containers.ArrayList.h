@@ -53,6 +53,14 @@ namespace klib::Kongkong::Containers
     }
 
     template <class T>
+    ArrayList<T>::~ArrayList()
+    {
+        for (T& value : *this) {
+            value.~T();
+        }
+    }
+
+    template <class T>
     void ArrayList<T>::Append(
     ) requires ::std::default_initializable<T>
     {
@@ -80,6 +88,15 @@ namespace klib::Kongkong::Containers
     ) const noexcept
     {
         return m_capacity;
+    }
+
+    template <class T>
+    template <class... Args>
+    void ArrayList<T>::Emplace(
+        Args&&... args
+    )
+    {
+
     }
 }
 

@@ -24,6 +24,11 @@ namespace klib::Kongkong::Containers
         ) noexcept;
     public:
 
+        [[nodiscard]] constexpr T* begin() noexcept;
+        [[nodiscard]] constexpr const T* begin() const noexcept;
+        [[nodiscard]] constexpr T* end() noexcept;
+        [[nodiscard]] constexpr const T* end() const noexcept;
+
         [[nodiscard]] constexpr bool StartsWith(
             T const& value
         ) const noexcept;
@@ -32,6 +37,30 @@ namespace klib::Kongkong::Containers
 
 namespace klib::Kongkong::Containers
 {
+    template <class T>
+    constexpr T* s_arrayBase<T>::begin() noexcept
+    {
+        return m_p.RawPointer();
+    }
+
+    template <class T>
+    constexpr const T* s_arrayBase<T>::begin() const noexcept
+    {
+        return m_p.RawPointer();
+    }
+
+    template <class T>
+    constexpr T* s_arrayBase<T>::end() noexcept
+    {
+        return m_p.RawPointer() + this->m_length;
+    }
+
+    template <class T>
+    constexpr const T* s_arrayBase<T>::end() const noexcept
+    {
+        return m_p.RawPointer() + this->m_length;
+    }
+
     template <class T>
     constexpr bool s_arrayBase<T>::StartsWith(
         T const& value
