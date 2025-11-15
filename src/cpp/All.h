@@ -7,6 +7,9 @@
     #pragma warning(disable:4996)
 #endif
 
+#include <chrono>
+#include <thread>
+
 #include <klib/Kongkong.h>
 #include <klib/Kongkong.Containers.h>
 #include <klib/Kongkong.Memory.h>
@@ -14,6 +17,7 @@
 #include <klib/Kongkong.IO.h>
 #include <klib/Kongkong.Text.h>
 #include <klib/Kongkong.Threading.h>
+#include <klib/Kongkong.Threading.Async.h>
 #include <klib/Kongkong.Win32.h>
 
 #endif //!ALL_H

@@ -17,6 +17,8 @@
 
 #include "impl/Kongkong.Threading.Mutex.cpp"
 
+#include "impl/Kongkong.Threading.Async.Awaiter.cpp"
+
 #if KLIB_ENV_WINDOWS
 #include "impl/Kongkong.Win32.Handle.cpp"
 #include "impl/Kongkong.Win32.WinError.cpp"

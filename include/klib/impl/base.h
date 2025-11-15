@@ -382,6 +382,14 @@ namespace klib::Kongkong::Threading
     class Mutex;
 }
 
+namespace klib::Kongkong::Threading::Async
+{
+    
+    class AsyncAction;
+    class Awaiter;
+    enum struct TaskStatus;
+}
+
 /// <summary>
 /// Win32APIのラッパー
 /// </summary>
